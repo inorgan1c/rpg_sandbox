@@ -14,14 +14,6 @@ public class CharacterStats : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            TakeDamage(10);
-        }
-    }
-
     public void TakeDamage(int damage)
     {
         damage -= armor.GetValue();
@@ -39,6 +31,19 @@ public class CharacterStats : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+        }
+    }
+
+    public void Heal(int hp)
+    {
+        hp = Mathf.Clamp(hp, 0, hp);
+        currentHealth += hp;
+
+        Debug.Log(transform.name + " heal " + hp + " hp");
+
+        if (OnHealthChanged != null)
+        {
+            OnHealthChanged.Invoke(maxHealth, currentHealth);
         }
     }
 

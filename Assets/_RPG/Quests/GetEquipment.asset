@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b0fbb059c9c9d4a8e858b1275edcd7, type: 3}
+  m_Name: GetEquipment
+  m_EditorClassIdentifier: 
+  info:
+    title: Equipment!
+    description: Get at least a sword and a shield
+  reward:
+    xp: 100
+    gold: 0
+  goals:
+  - {fileID: 11400000, guid: 4912b5fbb6da1a14a88f01a6608478b7, type: 2}
+  - {fileID: 11400000, guid: ea79ba9ec8e284e4b88ad1d3458d4672, type: 2}
+  completed: 0

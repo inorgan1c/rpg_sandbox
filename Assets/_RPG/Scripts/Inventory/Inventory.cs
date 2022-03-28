@@ -57,6 +57,19 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public int GetItemAmount(Item item)
+    {
+        if (item)
+        {
+            List<Item> instances = items.FindAll(i => i.name == item.name);
+            return instances.Count;
+        } else
+        {
+            return 0;
+        }
+        
+    } 
+
     private void Start()
     {
         inventoryUI.SetActive(false);

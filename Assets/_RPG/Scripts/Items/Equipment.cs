@@ -17,12 +17,10 @@ public class Equipment : Item
     public int armorModifier;
     public int damageModifier;
 
-    SkinnedMeshRenderer mesh;
-
-
     public override void Use()
     {
         base.Use();
+
         EquipmentManager.instance.Equip(this);
         RemoveFromInventory();
     }

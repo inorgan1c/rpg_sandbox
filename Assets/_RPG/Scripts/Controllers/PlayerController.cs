@@ -26,30 +26,30 @@ public class PlayerController : MonoBehaviour
                 Ray ray = cam.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
-                //move to world position if walkable
-                if (Physics.Raycast(ray, out hit, 100, movementMask))
-                {
-                    motor.MoveToPoint(hit.point);
-                    RemoveFocus();
-                }
-
-            }
-
-            if (Input.GetMouseButton(1))
-            {
-                Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-
-                //set focus on hit if interactable
                 if (Physics.Raycast(ray, out hit))
                 {
+                    //set focus on hit if interactable
                     Interactable interactable = hit.collider.GetComponent<Interactable>();
                     if (interactable)
                     {
                         SetFocus(interactable);
+
+                    }
+
+                    //move to point
+                    else
+                    {
+                        motor.MoveToPoint(hit.point);
+                        RemoveFocus();
                     }
                 }
-
+            }
+           
+             
+            //cast a magic spell if equipped?
+            if (Input.GetMouseButton(1))
+            {
+                
             }
         }
     }
@@ -79,3 +79,5 @@ public class PlayerController : MonoBehaviour
         currentFocus = null;
     }
 }
+
+
