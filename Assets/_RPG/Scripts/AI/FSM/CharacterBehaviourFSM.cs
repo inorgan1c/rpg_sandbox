@@ -6,14 +6,17 @@ public class CharacterBehaviourFSM : MonoBehaviour
     public FSMState[] statePool;
     public FSMState emptyAction;
 
+    FSMState[] statePoolInstances;
     FSMState currentState;
 
     // Start is called before the first frame update
     void Start()
     {
-        foreach (FSMState state in statePool)
+        statePoolInstances = new FSMState[statePool.Length];
+        for (int i = 0; i < statePool.Length; ++i)
         {
-            state.Init(this);
+            statePoolInstances[i] = FSMState.Instantiate(statePool[i]);
+            statePoolInstances[i].Init(this);
         }
         currentState = emptyAction;
         TransitionToState(startState);
@@ -39,7 +42,7 @@ public class CharacterBehaviourFSM : MonoBehaviour
 
     FSMState GetState(FSMStateType stateName)
     {
-        foreach (var state in statePool)
+        foreach (var state in statePoolInstances)
         {
             if (state.StateName == stateName)
             {

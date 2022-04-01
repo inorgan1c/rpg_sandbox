@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97b0fbb059c9c9d4a8e858b1275edcd7, type: 3}
-  m_Name: GatherPotionsQuest
+  m_Name: KillTheSkeleton
   m_EditorClassIdentifier: 
   info:
-    title: Potions!
-    description: Get three Healing Potions in your inventory
+    title: Skeletons Wood
+    description: The Skeletons have haunted the forest to the northwest
   reward:
-    xp: 0
+    xp: 200
     gold: 0
   goals:
-  - {fileID: 11400000, guid: c9c0bc2615b4d924ebeed80972dd49ea, type: 2}
+  - {fileID: 11400000, guid: a4b4a6f7acf1420499ac81e2dc76903c, type: 2}
   completed: 0

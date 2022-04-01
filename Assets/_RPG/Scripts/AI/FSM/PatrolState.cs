@@ -4,48 +4,37 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [CreateAssetMenu(fileName = "New Patrol State", menuName = "AI/FSM State/Patrol State")]
-
 public class PatrolState : FSMState
 {
     public override FSMStateType StateName { get { return FSMStateType.Patrol; } }
 
-    [SerializeField] Vector3[] patrolPath;
+    [SerializeField] float patrolAreaRadius;
     private NavMeshAgent agent;
     private Perception perception;
-    private int currentCheckpoint = 0;
-
+    private Vector3 startPos;
+    private Vector3 currentDest;
 
     public override void Init(CharacterBehaviourFSM fsm)
     {
         base.Init(fsm);
         agent = Controller.GetComponent<NavMeshAgent>();
         perception = Controller.GetComponent<Perception>();
+        startPos = agent.transform.position;
 
-
-        if (patrolPath.Length <= 0)
-        {
-            Debug.Log("Patrol path has no checkpoints!");
-
-        }
-        else
-        {
-            currentCheckpoint = 0;
-        }
     }
 
     public override void DoAction()
     {
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
-            currentCheckpoint = (currentCheckpoint + 1) % patrolPath.Length;
-            agent.SetDestination(patrolPath[currentCheckpoint]);
+            agent.SetDestination(startPos + GetRandomDestination());
         }
     }
 
     public override void OnEnter()
     {
         agent.isStopped = false;
-        agent.SetDestination(patrolPath[currentCheckpoint]);
+        currentDest = startPos + GetRandomDestination();
     }
 
     public override void OnExit()
@@ -60,5 +49,11 @@ public class PatrolState : FSMState
             return FSMStateType.Chase;
         }
         return StateName;
+    }
+
+    private Vector3 GetRandomDestination()
+    {
+        Vector2 randDir = Random.insideUnitCircle * patrolAreaRadius;
+        return new Vector3(randDir.x, 0, randDir.y);
     }
 }

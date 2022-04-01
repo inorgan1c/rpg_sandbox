@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class PlayerStats : CharacterStats  
 {
+    int xp = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged;   
+        EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged;
     }
 
     void OnEquipmentChanged(Equipment newItem, Equipment oldItem)
@@ -25,6 +27,13 @@ public class PlayerStats : CharacterStats
             damage.RemoveModifier(oldItem.damageModifier);
         }
     }
+
+    public void UpdateXP(int newXP)
+    {
+        xp += newXP;
+        Debug.Log("Player XP: " + xp + "(+" + newXP + ")");
+    } 
+
 
     public override void Die()
     {

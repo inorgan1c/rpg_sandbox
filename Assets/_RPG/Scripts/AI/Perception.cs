@@ -61,7 +61,6 @@ public class Perception : MonoBehaviour
 
         if (Physics.Raycast(eye.position, DirToTarget, out Info, sightRadius))
         {
-            Debug.Log(Info.transform);
             if (Info.transform.CompareTag(target.tag))
             {
                 return true;

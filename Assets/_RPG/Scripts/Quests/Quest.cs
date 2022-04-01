@@ -26,7 +26,7 @@ public class Quest : ScriptableObject
         public int CurrentAmount { get; protected set; }
         public int requiredAmount = 1;
         public bool Completed { get; protected set; }
-        public UnityEvent QuestGoalCompleted;
+        [HideInInspector] public UnityEvent QuestGoalCompleted;
 
         public virtual string Description()
         {
@@ -41,7 +41,6 @@ public class Quest : ScriptableObject
 
         protected void Evaluate()
         {
-            Debug.Log("CurrentAmount: " + CurrentAmount + " RequiredAmount: " + requiredAmount);
             if (CurrentAmount >= requiredAmount)
             {
                 Complete();
@@ -53,7 +52,6 @@ public class Quest : ScriptableObject
             Completed = true;
             QuestGoalCompleted.Invoke();
             QuestGoalCompleted.RemoveAllListeners();
-            Debug.Log(Description() + ": goal completed");
         }
     }
 
@@ -84,7 +82,6 @@ public class Quest : ScriptableObject
             //reward ... 
             questCompleted.Invoke(this);
             questCompleted.RemoveAllListeners();
-            Debug.Log(info.title + ": completed");
         }
     }
 }

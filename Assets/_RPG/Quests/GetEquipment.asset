@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GetEquipment
   m_EditorClassIdentifier: 
   info:
-    title: Equipment!
-    description: Get at least a sword and a shield
+    title: Ready for Battle
+    description: Get ready for the battlefield gathering at least a sword and a shield
   reward:
     xp: 100
     gold: 0

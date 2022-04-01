@@ -24,9 +24,27 @@ public class PlayerManager : MonoBehaviour
 
     public Transform player;
 
+    private void OnEnable()
+    {
+        EnemyStats.onEnemyDeath += OnEnemyDeath;
+    }
+
+    private void OnDisable()
+    {
+        EnemyStats.onEnemyDeath -= OnEnemyDeath;
+    }
+
     public void KillPlayer()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void OnEnemyDeath(CharacterConfig enemyConfig)
+    {
+        if (enemyConfig != null)
+        {
+            player.GetComponent<PlayerStats>().UpdateXP(enemyConfig.xp);            
+        }
+
+    }
 }

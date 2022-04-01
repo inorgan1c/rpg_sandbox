@@ -21,13 +21,9 @@ public class CharacterStats : MonoBehaviour
         
 
         currentHealth -= damage;
-        Debug.Log(transform.name + " takes " + damage + " damage.");
-
-        if (OnHealthChanged != null)
-        {
-            OnHealthChanged.Invoke(maxHealth, currentHealth);
-        }
-
+        Debug.Log(transform.name + " takes " + damage + " damage. Health: "+currentHealth);
+        OnHealthChanged?.Invoke(maxHealth, currentHealth);
+        
         if (currentHealth <= 0)
         {
             Die();
