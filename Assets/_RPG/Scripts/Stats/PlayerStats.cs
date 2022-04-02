@@ -8,7 +8,7 @@ public class PlayerStats : CharacterStats
     int xp = 0;
     public static float awakenTime;
 
-    public TimedStat stamina;
+    public TimedStat energy;
 
     void Start()
     {
@@ -16,7 +16,7 @@ public class PlayerStats : CharacterStats
         TimeManager.onNewHour += OnNewHour;
         TimeManager.onNewDay += OnNewDay; //temporary!!! fixed when sleep time will be implemented
 
-        stamina.Init();
+        energy.Init();
         OnNewDay();
     }
 

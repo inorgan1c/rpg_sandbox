@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f618004e092bcf4cbbc10c88dbd637b, type: 3}
+  m_Name: SkeletonWoodDialogue
+  m_EditorClassIdentifier: 
+  narrator: npc1
+  dialogueLines:
+  - Hey you! Come here...
+  - Have you seen the forest to the northwest? Is not far from here
+  - The Skeletons have haunted it!
+  - We cannot go back home by the forest, is too dangerous
+  - 'Please, kill all the skeletons: make the road to the village will be safe again!'

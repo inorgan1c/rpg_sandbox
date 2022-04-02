@@ -43,7 +43,11 @@ public class PlayerManager : MonoBehaviour
     {
         if (enemyConfig != null)
         {
-            player.GetComponent<PlayerStats>().UpdateXP(enemyConfig.xp);            
+            player.GetComponent<PlayerStats>().UpdateXP(enemyConfig.xp);
+            foreach (Item i in enemyConfig.loot)
+            {
+                Inventory.instance.AddItem(i);
+            }
         }
 
     }

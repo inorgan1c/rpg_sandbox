@@ -19,6 +19,10 @@ public class TimedStat : Stat
     void OnNewHour()
     {
         currentValue -= timeDecrease.Evaluate(PlayerStats.awakenTime);
+        if (currentValue <= 0)
+        {
+            currentValue = 0;
+        }
     }
 
     void OnNewDay()

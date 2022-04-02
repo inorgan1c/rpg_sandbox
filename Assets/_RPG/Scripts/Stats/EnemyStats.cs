@@ -13,7 +13,7 @@ public class EnemyStats : CharacterStats
     {
         if (onEnemyDeath != null)
         {
-            onEnemyDeath.Invoke(config);
+            onEnemyDeath.Invoke(config);            
         }
         base.Die();
         Destroy(gameObject);
