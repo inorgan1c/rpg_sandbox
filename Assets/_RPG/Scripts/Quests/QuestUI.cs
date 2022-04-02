@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class QuestUI : MonoBehaviour
 {
     public Transform slotsParent;
+    public Text calendar;
+    public Text clock;
 
     [SerializeField] GameObject slotPrefab;
     QuestManager questManager;
@@ -14,6 +16,9 @@ public class QuestUI : MonoBehaviour
     {
         questManager = QuestManager.instance;
         questManager.onQuestUpdateCallback += UpdateJournal;
+        TimeManager.onNewDay += UpdateCalendar;
+        TimeManager.onNewHour += UpdateClock;
+
         gameObject.SetActive(false);
     }
 
@@ -41,5 +46,18 @@ public class QuestUI : MonoBehaviour
                 }
             }
         }
+    }
+
+    void UpdateCalendar()
+    {
+        calendar.text = "Days: " + TimeManager.ElapsedDays();
+    }
+
+    void UpdateClock()
+    {
+        int dayTimeInHours = (int)TimeManager.DayTimeInHours();
+        int clockTime = dayTimeInHours % 12;
+        string period = dayTimeInHours >= 12 ? "PM" : "AM";
+        clock.text = clockTime.ToString("00") + ":00 " + period;
     }
 }

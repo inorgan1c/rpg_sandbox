@@ -5,11 +5,11 @@ using UnityEngine;
 public class Stat
 {
     [SerializeField]
-    private int baseValue;
+    protected int baseValue;
 
     private List<int> modifiers = new List<int>();
 
-    public int GetValue()
+    public virtual int GetValue()
     {
         int value = baseValue;
         modifiers.ForEach(m => value += m);

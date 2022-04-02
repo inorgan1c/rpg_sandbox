@@ -6,11 +6,18 @@ using UnityEngine;
 public class PlayerStats : CharacterStats  
 {
     int xp = 0;
+    public static float awakenTime;
 
-    // Start is called before the first frame update
+    public TimedStat stamina;
+
     void Start()
     {
-        EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged;
+        EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged;    
+        TimeManager.onNewHour += OnNewHour;
+        TimeManager.onNewDay += OnNewDay; //temporary!!! fixed when sleep time will be implemented
+
+        stamina.Init();
+        OnNewDay();
     }
 
     void OnEquipmentChanged(Equipment newItem, Equipment oldItem)
@@ -39,5 +46,16 @@ public class PlayerStats : CharacterStats
     {
         base.Die();
         PlayerManager.instance.KillPlayer();
+    }
+
+    public void OnNewHour()
+    {
+        awakenTime += 1/24f;
+
+    }
+
+    public void OnNewDay()
+    {
+        awakenTime = 0;
     }
 }
