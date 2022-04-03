@@ -7,7 +7,9 @@ public enum FSMStateType
     None, 
     Patrol,
     Chase,
-    Attack
+    Attack,
+    Escape,
+    Wander
 }
 
 public class FSMState : ScriptableObject

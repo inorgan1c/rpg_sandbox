@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [CreateAssetMenu(fileName = "New Chase State", menuName = "AI/FSM State/Chase State")]
-
 public class ChaseState : FSMState
 {
     public float fieldOfView = 60f;

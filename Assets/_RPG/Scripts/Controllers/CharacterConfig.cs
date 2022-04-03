@@ -7,6 +7,7 @@ public class CharacterConfig : ScriptableObject
     public enum CharacterClassType
     {
         Skeleton,
+        Deer,
         Soldier
     }
 

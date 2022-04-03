@@ -35,6 +35,7 @@ public class CharacterBehaviourFSM : MonoBehaviour
 
     private void TransitionToState(FSMStateType stateName)
     {
+        Debug.Log("Transition to: " + stateName);
         currentState.OnExit();
         currentState = GetState(stateName);
         currentState.OnEnter();
