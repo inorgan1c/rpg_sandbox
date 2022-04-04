@@ -8,8 +8,19 @@ public class PlayerController : MonoBehaviour
 
     Camera cam;
     PlayerMotor motor;
+    bool canMove = false;
 
-    
+    private void OnEnable()
+    {
+        DialogueManager.onDialogueStart += OnDialogueStart;
+        DialogueManager.onDialogueEnd += OnDialogueEnd;
+    }
+
+    private void OnDisable()
+    {
+        DialogueManager.onDialogueStart -= OnDialogueStart;
+        DialogueManager.onDialogueEnd -= OnDialogueEnd;
+    }
 
     void Start()
     {
@@ -19,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!EventSystem.current.IsPointerOverGameObject())
+        if (!EventSystem.current.IsPointerOverGameObject() && !canMove)
         {
             if (Input.GetMouseButton(0))
             {
@@ -38,7 +49,7 @@ public class PlayerController : MonoBehaviour
 
                     //move to point
                     else
-                    {
+                    { 
                         motor.MoveToPoint(hit.point);
                         RemoveFocus();
                     }
@@ -77,6 +88,16 @@ public class PlayerController : MonoBehaviour
         }
         motor.StopFollowingTarget();
         currentFocus = null;
+    }
+
+    void OnDialogueStart(string name)
+    {
+        canMove = true;
+    }
+
+    void OnDialogueEnd()
+    {
+        canMove = false;
     }
 }
 

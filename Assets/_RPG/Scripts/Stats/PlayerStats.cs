@@ -41,6 +41,12 @@ public class PlayerStats : CharacterStats
         Debug.Log("Player XP: " + xp + "(+" + newXP + ")");
     } 
 
+    public void RestoreEnergy(int ep)
+    {
+        energy.Restore(ep);
+
+    }
+
 
     public override void Die()
     {

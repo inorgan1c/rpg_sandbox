@@ -3,7 +3,7 @@ using UnityEngine;
 public class CharacterStats : MonoBehaviour
 {
     public int maxHealth = 100;
-    public int currentHealth { get; private set; }
+    public int currentHealth { get; protected set; }
 
     public Stat armor;
     public Stat damage;
