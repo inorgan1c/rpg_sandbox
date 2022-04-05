@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f618004e092bcf4cbbc10c88dbd637b, type: 3}
+  m_Name: DeerHuntDialogue
+  m_EditorClassIdentifier: 
+  narrator: Local Hunter
+  dialogueLines:
+  - 'Hello stranger! '
+  - The days are long and tiring in this valley, you will need food to get by
+  - Deer meat is ideal for regaining strength
+  - It is common to encounter some deer grazing nearby
+  - Hunt at least two deer and get yourself a meal for the next few days!

@@ -36,6 +36,7 @@ public class DialogueManager : MonoBehaviour
 
     public static void StartDialogue(Dialogue dialogue)
     {
+        Debug.Log("START DIALOGUE");
         instance.sentences.Clear();
         if (dialogue)
         {

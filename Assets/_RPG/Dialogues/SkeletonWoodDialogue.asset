@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f618004e092bcf4cbbc10c88dbd637b, type: 3}
   m_Name: SkeletonWoodDialogue
   m_EditorClassIdentifier: 
-  narrator: npc1
+  narrator: Traveler
   dialogueLines:
   - Hey you! Come here...
   - Have you seen the forest to the northwest? Is not far from here

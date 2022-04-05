@@ -21,7 +21,8 @@ public class DialogueUI : MonoBehaviour
 
     void OnDialogueStart(string title)
     {
-        if (dialoguePanel)
+        Debug.Log("OndialogueStart");
+        if (dialoguePanel != null)
         {
             dialoguePanel.SetActive(true);
             narratorText.text = title;

@@ -27,6 +27,7 @@ public class QuestManager : MonoBehaviour
     public event OnQuestUpdate onQuestUpdateCallback;
 
     [SerializeField] GameObject questUI;
+    [SerializeField] QuestCompleteDialogue questCompleteDialogue;
 
     private void Start()
     {
@@ -49,7 +50,9 @@ public class QuestManager : MonoBehaviour
     {
         if (activeQuests.Remove(q))
         {
-            Debug.Log(q.info.title + ": COMPLETED!");
+            questCompleteDialogue.Init(q.info.title, q.reward.xp);
+            DialogueManager.StartDialogue(questCompleteDialogue);
+
             completedQuests.Add(q);
             onQuestUpdateCallback.Invoke(q.info, true);
         }
