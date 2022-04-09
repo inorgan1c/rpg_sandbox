@@ -6,7 +6,8 @@ using UnityEngine;
 public class KillGoal : Quest.QuestGoal
 {
     public CharacterConfig.CharacterClassType targetClass;
-    
+    public StatsEventChannel statsEventChannel;
+
     public override string Description()
     {
         string descr = "Kill " + requiredAmount + " " + targetClass;
@@ -17,7 +18,7 @@ public class KillGoal : Quest.QuestGoal
     {
         base.Initialize();
         CurrentAmount = 0;
-        EnemyStats.onEnemyDeath += OnKill;
+        statsEventChannel.OnEnemyDeath += OnKill;
     }
 
     private void OnKill(CharacterConfig config)

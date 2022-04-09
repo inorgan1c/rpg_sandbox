@@ -7,11 +7,11 @@ public class HealthUI : MonoBehaviour
 {
     public GameObject prefab;
     public Transform target;
+    [SerializeField] StatsEventChannel statsEventChannel;
 
     Transform ui;
     Transform cam;
     Image healthSlider;
-    CharacterStats stats;
     float visibleTime = 5f;
     float lastHealthChangedTime;
 
@@ -30,8 +30,7 @@ public class HealthUI : MonoBehaviour
             }
         }
 
-        stats = GetComponent<CharacterStats>();
-        stats.OnHealthChanged += OnHealthChanged;
+        statsEventChannel.OnHealthChanged += OnHealthChanged;
     }
 
     void LateUpdate()
@@ -49,9 +48,9 @@ public class HealthUI : MonoBehaviour
         
     }
 
-    void OnHealthChanged(int maxHealth, int currentHealth)
+    void OnHealthChanged(int id, int maxHealth, int currentHealth)
     {
-        if (ui)
+        if (ui && (gameObject.GetInstanceID() == id))
         {
             float hp = (float)currentHealth / maxHealth;
             healthSlider.fillAmount = hp;

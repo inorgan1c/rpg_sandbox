@@ -7,14 +7,15 @@ public class PlayerStats : CharacterStats
 {
     int xp = 0;
     public static float awakenTime;
-
     public TimedStat energy;
+
+    [SerializeField] TimeEventChannel timeEventChannel;
 
     void Start()
     {
-        EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged;    
-        TimeManager.onNewHour += OnNewHour;
-        TimeManager.onNewDay += OnNewDay; //temporary!!! fixed when sleep time will be implemented
+        EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged;
+        timeEventChannel.OnNewHour += OnNewHour;
+        timeEventChannel.OnNewDay += OnNewDay; //temporary!!! fixed when sleep time will be implemented
 
         energy.Init();
         OnNewDay();

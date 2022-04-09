@@ -7,12 +7,13 @@ public class TimedStat : Stat
 {
     public AnimationCurve timeDecrease;
 
+    [SerializeField] TimeEventChannel TimeChannel;
     private float currentValue;
 
     public void Init()
     {
-        TimeManager.onNewHour += OnNewHour;
-        TimeManager.onNewDay += OnNewDay;
+        TimeChannel.OnNewHour += OnNewHour;
+        TimeChannel.OnNewDay += OnNewDay;
         OnNewDay();
     }
 

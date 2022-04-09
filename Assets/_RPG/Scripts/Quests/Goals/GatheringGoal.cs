@@ -7,6 +7,7 @@ using UnityEngine;
 public class GatheringGoal : Quest.QuestGoal
 {
     public Item item;
+    [SerializeField] InventoryEventChannel inventoryEventChannel;
 
     public override string Description()
     {
@@ -17,7 +18,7 @@ public class GatheringGoal : Quest.QuestGoal
     public override void Initialize()
     {
         base.Initialize();
-        Inventory.instance.OnItemChangedCallback += OnGathering;
+        inventoryEventChannel.OnInventoryUpdate += OnGathering;
     }
 
     private void OnGathering()

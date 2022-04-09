@@ -5,6 +5,8 @@ public class PlayerController : MonoBehaviour
 {
     public LayerMask movementMask;
     public Interactable currentFocus;
+    public DialogueEventChannel DialogueChannel;
+
 
     Camera cam;
     PlayerMotor motor;
@@ -12,14 +14,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        DialogueManager.onDialogueStart += OnDialogueStart;
-        DialogueManager.onDialogueEnd += OnDialogueEnd;
+        DialogueChannel.OnStartDialogue += EnableMovement;
+        DialogueChannel.OnEndDialogue += DisableMovement;
     }
 
     private void OnDisable()
     {
-        DialogueManager.onDialogueStart -= OnDialogueStart;
-        DialogueManager.onDialogueEnd -= OnDialogueEnd;
+        DialogueChannel.OnStartDialogue -= EnableMovement;
+        DialogueChannel.OnEndDialogue -= DisableMovement;
     }
 
     void Start()
@@ -90,12 +92,12 @@ public class PlayerController : MonoBehaviour
         currentFocus = null;
     }
 
-    void OnDialogueStart(string name)
+    void EnableMovement(Dialogue dialogue=null)
     {
         canMove = true;
     }
 
-    void OnDialogueEnd()
+    void DisableMovement()
     {
         canMove = false;
     }

@@ -11,36 +11,74 @@ public class DialogueUI : MonoBehaviour
     public Button nextLineButton;
     public Button closeButton;
 
-    // Start is called before the first frame update
-    void Start()
+    public DialogueEventChannel dialogueEventChannel;
+
+    private Queue<string> sentences;
+
+    private void OnEnable()
     {
-        DialogueManager.onDialogueStart += OnDialogueStart;
-        DialogueManager.onDialogueEnd += OnDialogueEnd;
-        dialoguePanel.SetActive(false);
+        dialogueEventChannel.OnStartDialogue += StartDialogue;
     }
 
-    void OnDialogueStart(string title)
+    private void OnDisable()
     {
-        Debug.Log("OndialogueStart");
+        dialogueEventChannel.OnStartDialogue -= StartDialogue;
+
+    }
+
+    void Start()
+    {
+        dialoguePanel.SetActive(false);
+        sentences = new Queue<string>();
+    }
+
+    public void StartDialogue(Dialogue dialogue)
+    {
+        sentences.Clear();
+        if (dialogue)
+        {
+            foreach (string line in dialogue.dialogueLines)
+            {
+                sentences.Enqueue(line);
+            }
+            Show(dialogue.narrator);
+        }
+        else
+        {
+            EndDialogue();
+        }
+    }
+
+    public void NextLine()
+    {
+        if (sentences.Count == 0)
+        {
+            EndDialogue();
+        }
+        else
+        {
+            dialogueLineText.text = sentences.Dequeue();
+
+        }
+    }
+
+    public void EndDialogue()
+    {
+        nextLineButton.gameObject.SetActive(false);
+        closeButton.gameObject.SetActive(true);
+        dialogueEventChannel?.RaiseEndDialogue();
+    }
+
+    void Show(string title)
+    {
         if (dialoguePanel != null)
         {
             dialoguePanel.SetActive(true);
             narratorText.text = title;
-            RequestNextLine();
+            NextLine();
 
             nextLineButton.gameObject.SetActive(true);
             closeButton.gameObject.SetActive(false);
         }
-    }
-
-    public void RequestNextLine()
-    {
-        dialogueLineText.text = DialogueManager.NextLine();
-    }
-
-    void OnDialogueEnd()
-    {
-        nextLineButton.gameObject.SetActive(false);
-        closeButton.gameObject.SetActive(true);
     }
 }

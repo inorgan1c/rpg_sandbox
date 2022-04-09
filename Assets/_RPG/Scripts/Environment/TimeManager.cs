@@ -4,33 +4,13 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-    #region Singleton
-    public static TimeManager instance;
-
-    private void Awake()
-    {
-        if (!instance)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-    }
-    #endregion
-
     public float fullDayLength;
     public float startTime = 0.4f;
     private float timeRate;
     private float lastHour;
     public static float time { get; private set; }
 
-    public delegate void OnNewDay();
-    public static event OnNewDay onNewDay;
-    public delegate void OnNewHour();
-    public static event OnNewHour onNewHour;
+    public TimeEventChannel timeEventChannel;
 
     // Start is called before the first frame update
     void Start()
@@ -48,12 +28,12 @@ public class TimeManager : MonoBehaviour
         float hours = DayTimeInHours();
         if (hours == 0)
         {
-            onNewDay?.Invoke();
+            timeEventChannel?.RaiseNewDay();
         }
 
         if (hours != lastHour)
         {
-            onNewHour?.Invoke();
+            timeEventChannel?.RaiseNewHour();
             lastHour = hours;
         }
     }

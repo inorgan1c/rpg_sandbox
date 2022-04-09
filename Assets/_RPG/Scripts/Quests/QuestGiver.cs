@@ -6,13 +6,14 @@ using UnityEngine;
 public class QuestGiver : DialogueTrigger
 {
     public Quest quest;
+    [SerializeField] QuestEventChannel questEventChannel;
 
     public override void Interact()
     {
         if (dialogue)
         {
             base.Interact();
-            DialogueManager.onDialogueEnd += AssignQuest;
+            dialogueEventChannel.OnEndDialogue += AssignQuest;
 
         } else
         {
@@ -25,8 +26,8 @@ public class QuestGiver : DialogueTrigger
     {
         if (quest)
         {
-            QuestManager.instance.AddQuest(quest);
-            DialogueManager.onDialogueEnd -= AssignQuest;
+            questEventChannel?.RaiseQuestStarted(quest);
+            dialogueEventChannel.OnEndDialogue -= AssignQuest;
             quest = null;
         }
     }

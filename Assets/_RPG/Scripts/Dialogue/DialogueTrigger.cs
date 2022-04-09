@@ -5,10 +5,11 @@ using UnityEngine;
 public class DialogueTrigger : Interactable
 {
     [SerializeField] protected Dialogue dialogue;
+    [SerializeField] protected DialogueEventChannel dialogueEventChannel;
 
     public override void Interact()
     {
         base.Interact();
-        DialogueManager.StartDialogue(dialogue);
+        dialogueEventChannel?.RaiseStartDialogue(dialogue);
     }
 }

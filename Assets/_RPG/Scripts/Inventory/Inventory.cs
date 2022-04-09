@@ -6,10 +6,8 @@ public class Inventory : MonoBehaviour
 {
     public List<Item> items = new List<Item>();
     public int space = 20;
-    public GameObject inventoryUI;
 
-    public delegate void OnItemChanged();
-    public OnItemChanged OnItemChangedCallback;
+    [SerializeField] InventoryEventChannel inventoryEventChannel;
 
     #region Singleton
     public static Inventory instance;
@@ -35,10 +33,8 @@ public class Inventory : MonoBehaviour
             if (items.Count < space)
             {
                 items.Add(item);
-                if (OnItemChangedCallback != null)
-                {
-                    OnItemChangedCallback.Invoke();
-                }
+                inventoryEventChannel?.RaiseInventoryUpdate();
+
             } else
             {
                 Debug.Log("Not enough space in inventory");
@@ -51,10 +47,7 @@ public class Inventory : MonoBehaviour
     public void RemoveItem(Item item)
     {
         items.Remove(item);
-        if (OnItemChangedCallback != null)
-        {
-            OnItemChangedCallback.Invoke();
-        }
+        inventoryEventChannel?.RaiseInventoryUpdate();
     }
 
     public int GetItemAmount(Item item)
@@ -69,17 +62,4 @@ public class Inventory : MonoBehaviour
         }
         
     } 
-
-    private void Start()
-    {
-        inventoryUI.SetActive(false);
-    }
-
-    private void Update()
-    {
-        if (Input.GetButtonDown("Inventory"))
-        {
-            inventoryUI.SetActive(!inventoryUI.activeSelf);
-        }
-    }
 }

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: GetShield
   m_EditorClassIdentifier: 
   requiredAmount: 1
-  QuestGoalCompleted:
-    m_PersistentCalls:
-      m_Calls: []
+  questEventChannel: {fileID: 11400000, guid: 0d3cdd96c65dbf14d9940f56ea71216a, type: 2}
   item: {fileID: 11400000, guid: dbc47798a6859654bb052d71a9795ee3, type: 2}
+  inventoryEventChannel: {fileID: 11400000, guid: 3e1240f0cdf3b56419ed610db6f4b426, type: 2}

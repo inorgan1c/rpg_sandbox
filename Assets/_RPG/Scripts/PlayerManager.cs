@@ -23,15 +23,16 @@ public class PlayerManager : MonoBehaviour
     #endregion
 
     public Transform player;
+    [SerializeField] StatsEventChannel statsEventChannel;
 
     private void OnEnable()
     {
-        EnemyStats.onEnemyDeath += OnEnemyDeath;
+        statsEventChannel.OnEnemyDeath += OnEnemyDeath;
     }
 
     private void OnDisable()
     {
-        EnemyStats.onEnemyDeath -= OnEnemyDeath;
+        statsEventChannel.OnEnemyDeath -= OnEnemyDeath;
     }
 
     public void KillPlayer()

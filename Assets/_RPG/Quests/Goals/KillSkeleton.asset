@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: KillSkeleton
   m_EditorClassIdentifier: 
   requiredAmount: 4
-  QuestGoalCompleted:
-    m_PersistentCalls:
-      m_Calls: []
+  questEventChannel: {fileID: 11400000, guid: 0d3cdd96c65dbf14d9940f56ea71216a, type: 2}
   targetClass: 0
+  statsEventChannel: {fileID: 11400000, guid: c1a2ebb6760239646836dcd1eda8ce8c, type: 2}

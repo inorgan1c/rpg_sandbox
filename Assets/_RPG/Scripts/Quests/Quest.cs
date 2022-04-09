@@ -26,7 +26,7 @@ public class Quest : ScriptableObject
         public int CurrentAmount { get; protected set; }
         public int requiredAmount = 1;
         public bool Completed { get; protected set; }
-        [HideInInspector] public UnityEvent QuestGoalCompleted;
+        public QuestEventChannel questEventChannel;
 
         public virtual string Description()
         {
@@ -36,7 +36,6 @@ public class Quest : ScriptableObject
         public virtual void Initialize()
         {
             Completed = false;
-            QuestGoalCompleted = new UnityEvent();
         }
 
         protected void Evaluate()
@@ -50,8 +49,7 @@ public class Quest : ScriptableObject
         private void Complete()
         {
             Completed = true;
-            QuestGoalCompleted.Invoke();
-            QuestGoalCompleted.RemoveAllListeners();
+            questEventChannel?.RaiseQuestGoalCompleted();
         }
     }
 
@@ -60,18 +58,17 @@ public class Quest : ScriptableObject
     public Stat reward;
     public List<QuestGoal> goals;
     public bool completed = false;
-    public QuestCompletedEvent questCompleted;
+    public QuestEventChannel questEventChannel;
 
     public void Initialize()
     {
         completed = false;
-        questCompleted = new QuestCompletedEvent();
 
         foreach (QuestGoal goal in goals)
         {
             goal.Initialize();
-            goal.QuestGoalCompleted.AddListener( delegate { CheckGoals(); });
         }
+        questEventChannel.OnQuestGoalCompleted += CheckGoals;
     }
 
     private void CheckGoals()
@@ -80,11 +77,7 @@ public class Quest : ScriptableObject
         if (completed)
         {
             //reward ... 
-            questCompleted.Invoke(this);
-            questCompleted.RemoveAllListeners();
+            questEventChannel?.RaiseQuestCompleted(this);
         }
     }
 }
-
-
-public class QuestCompletedEvent : UnityEvent<Quest> { }

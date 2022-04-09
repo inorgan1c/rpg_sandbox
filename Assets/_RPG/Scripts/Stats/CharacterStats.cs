@@ -7,7 +7,8 @@ public class CharacterStats : MonoBehaviour
 
     public Stat armor;
     public Stat damage;
-    public event System.Action<int, int> OnHealthChanged;
+
+    [SerializeField] protected StatsEventChannel statsEventChannel;
 
     private void Awake()
     {
@@ -22,7 +23,7 @@ public class CharacterStats : MonoBehaviour
 
         currentHealth -= damage;
         Debug.Log(transform.name + " takes " + damage + " damage. Health: "+currentHealth);
-        OnHealthChanged?.Invoke(maxHealth, currentHealth);
+        statsEventChannel?.RaiseHealthChanged(gameObject.GetInstanceID(), maxHealth, currentHealth);
         
         if (currentHealth <= 0)
         {
@@ -34,13 +35,9 @@ public class CharacterStats : MonoBehaviour
     {
         hp = Mathf.Clamp(hp, 0, hp);
         currentHealth += hp;
+        statsEventChannel?.RaiseHealthChanged(gameObject.GetInstanceID(), maxHealth, currentHealth);
 
         Debug.Log(transform.name + " heal " + hp + " hp");
-
-        if (OnHealthChanged != null)
-        {
-            OnHealthChanged.Invoke(maxHealth, currentHealth);
-        }
     }
 
     public virtual void Die()

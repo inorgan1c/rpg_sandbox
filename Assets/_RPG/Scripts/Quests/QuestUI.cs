@@ -10,37 +10,33 @@ public class QuestUI : MonoBehaviour
     public Text clock;
 
     [SerializeField] GameObject slotPrefab;
-    QuestManager questManager;
+    [SerializeField] TimeEventChannel timeEventChannel;
+    [SerializeField] QuestEventChannel questEventChannel;
 
     private void Start()
     {
-        questManager = QuestManager.instance;
-        questManager.onQuestUpdateCallback += UpdateJournal;
-        TimeManager.onNewDay += UpdateCalendar;
-        TimeManager.onNewHour += UpdateClock;
+        questEventChannel.OnQuestStarted += UpdateJournal;
+        questEventChannel.OnQuestCompleted += UpdateJournal;
+        timeEventChannel.OnNewDay += UpdateCalendar;
+        timeEventChannel.OnNewHour += UpdateClock;
 
         gameObject.SetActive(false);
     }
 
 
-    // Update is called once per frame
-    void Update()
+    void UpdateJournal(Quest quest)
     {
-          
-    }
 
-    void UpdateJournal(Quest.Info questInfo, bool complete)
-    {
-        if (!complete)
+        if (!quest.completed)
         {
             GameObject newSlot = Instantiate(slotPrefab, slotsParent);
-            newSlot.GetComponent<QuestSlot>().SetInfo(questInfo);
+            newSlot.GetComponent<QuestSlot>().SetInfo(quest.info);
         } else
         {
             QuestSlot[] slots = slotsParent.GetComponentsInChildren<QuestSlot>();
             foreach (QuestSlot slot in slots)
             {
-                if (slot.info.title == questInfo.title)
+                if (slot.info.title == quest.info.title)
                 {
                     slot.MarkCompleted();
                 }
@@ -52,6 +48,7 @@ public class QuestUI : MonoBehaviour
     {
         calendar.text = "Days: " + TimeManager.ElapsedDays();
     }
+
 
     void UpdateClock()
     {
