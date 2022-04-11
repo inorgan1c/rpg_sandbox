@@ -55,10 +55,6 @@ public class InventorySlotUIController : MonoBehaviour
     private void UpdateSlot()
     {
         bool display = _slot != null && _slot.Item != null && _slot.Quantity > 0;
-        if (_slot.Item)
-        {
-            Debug.Log(_slot.Item.name);
-        }
 
         if (_icon != null)
         {
@@ -68,7 +64,7 @@ public class InventorySlotUIController : MonoBehaviour
 
         if (_quantityText != null)
         {
-            _quantityText.gameObject.SetActive(display);
+             _quantityText.gameObject.SetActive(display);
             _quantityText.text = display ?_slot.Quantity.ToString() : "";
 
         }

@@ -37,7 +37,7 @@ public class Inventory : MonoBehaviour
     {
         if (item)
         {
-            List<Item> instances = items.FindAll(i => i.name == item.name);
+            List<Item> instances = items.FindAll(i => i.Name == item.Name);
             return instances.Count;
         } else
         {

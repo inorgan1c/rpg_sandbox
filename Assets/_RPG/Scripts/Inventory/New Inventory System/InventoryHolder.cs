@@ -31,25 +31,14 @@ public class InventoryHolder : MonoBehaviour
 
     }
 
-    private void OnLoot(InventorySystem.InventoryItem item, int quantity)
+    private void OnLoot(Item item, int quantity)
     {
-        InventorySystem.InventorySlot slot = _inventory.FindFirst(slot => slot.Item == item);
+        InventorySystem.InventorySlot slot = _inventory.FindFirst(slot => slot.Item == item || slot.Item == null);
 
         if (slot == null && CanCreateSlots)
         {
             slot = _inventory.CreateSlot();
         }
         slot?.StoreItem(item, quantity);
-    }
-
-    private void OnUse(InventorySystem.InventoryItem item, int quantity)
-    {
-        InventorySystem.InventorySlot slot = _inventory.FindFirst(slot => slot.Item == item);
-
-        if (slot == null && CanCreateSlots)
-        {
-            slot = _inventory.CreateSlot();
-        }
-        slot?.Use(quantity);
     }
 }

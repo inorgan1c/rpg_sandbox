@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eecaf403323a97740a3f1097ff48e32a, type: 3}
   m_Name: DeerMeat
   m_EditorClassIdentifier: 
-  name: Deer Meat
-  icon: {fileID: 21300000, guid: c7dfd0d9330af6a488800a26511e6095, type: 3}
+  Name: Deer Meat
+  Icon: {fileID: 21300000, guid: c7dfd0d9330af6a488800a26511e6095, type: 3}
   isDefaultItem: 0
   healthModifier: 5
   energyModifier: 3

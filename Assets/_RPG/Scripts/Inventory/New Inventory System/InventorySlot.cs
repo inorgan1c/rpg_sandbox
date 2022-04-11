@@ -7,17 +7,17 @@ namespace InventorySystem
 {
     public class InventorySlot
     {
-        public InventoryItem _item;
+        public Item _item;
         public int _quantity;
 
-        public InventoryItem Item => _item;
+        public Item Item => _item;
         public int Quantity => _quantity;
 
 
         public UnityAction OnItemChange;
 
 
-        public void StoreItem(InventoryItem item, int quantity)
+        public void StoreItem(Item item, int quantity)
         {
             if ((_item == null) || (_item == item))
             {

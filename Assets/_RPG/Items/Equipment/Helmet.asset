@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49cfd2d586c7cfb459139b1f9f2c435b, type: 3}
   m_Name: Helmet
   m_EditorClassIdentifier: 
-  name: Helmet of Protection
-  icon: {fileID: 21300000, guid: 62d713ef765a4134896beb6896759814, type: 3}
+  Name: Helmet
+  Icon: {fileID: 21300000, guid: 62d713ef765a4134896beb6896759814, type: 3}
   isDefaultItem: 0
   equipSlot: 0
   meshPrefab: {fileID: 2707568217906028391, guid: 60bf58a312b99bf4db9b0e2f3279ff48, type: 3}

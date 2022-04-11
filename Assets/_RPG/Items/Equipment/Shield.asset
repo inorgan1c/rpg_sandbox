@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49cfd2d586c7cfb459139b1f9f2c435b, type: 3}
   m_Name: Shield
   m_EditorClassIdentifier: 
-  name: Shield
-  icon: {fileID: 21300000, guid: a33eda0463a76024faeb32b268c62d67, type: 3}
+  Name: Shield
+  Icon: {fileID: 21300000, guid: a33eda0463a76024faeb32b268c62d67, type: 3}
   isDefaultItem: 0
   equipSlot: 5
   meshPrefab: {fileID: 2592517959036598171, guid: 35818f764f01b23469e70ecd263ab9d5, type: 3}

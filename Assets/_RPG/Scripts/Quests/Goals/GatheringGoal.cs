@@ -14,7 +14,7 @@ public class GatheringGoal : Quest.QuestGoal
 
     public override string Description()
     {
-        string descr = "Gather " + requiredAmount + " " + item.name;
+        string descr = "Gather " + requiredAmount + " " + item.Name;
         return descr;
     }
 

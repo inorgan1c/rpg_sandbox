@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49cfd2d586c7cfb459139b1f9f2c435b, type: 3}
   m_Name: Hair
   m_EditorClassIdentifier: 
-  name: Hair
-  icon: {fileID: 0}
+  Name: Hair
+  Icon: {fileID: 0}
   isDefaultItem: 1
   equipSlot: 0
   meshPrefab: {fileID: 3136629119223389855, guid: 5106d63e542543c4a84d39b9b799ccd7, type: 3}

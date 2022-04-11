@@ -22,7 +22,7 @@ public class ItemPickup : Interactable
         pickedUp = inventory.AddItem(item);
         if (pickedUp)
         {
-            Debug.Log("PickUp: " + item.name);
+            Debug.Log("PickUp: " + item.Name);
             Destroy(gameObject);
         }
     }

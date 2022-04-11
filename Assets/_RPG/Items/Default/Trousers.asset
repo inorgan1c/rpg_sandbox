@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49cfd2d586c7cfb459139b1f9f2c435b, type: 3}
   m_Name: Trousers
   m_EditorClassIdentifier: 
-  name: Trousers
-  icon: {fileID: 0}
+  Name: Trousers
+  Icon: {fileID: 0}
   isDefaultItem: 1
   equipSlot: 2
   meshPrefab: {fileID: 4577186147338307309, guid: f5e94440f1488c84fb6135465760fcda, type: 3}

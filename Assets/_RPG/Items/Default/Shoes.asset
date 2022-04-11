@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49cfd2d586c7cfb459139b1f9f2c435b, type: 3}
   m_Name: Shoes
   m_EditorClassIdentifier: 
-  name: Shoes
-  icon: {fileID: 0}
+  Name: Shoes
+  Icon: {fileID: 0}
   isDefaultItem: 1
   equipSlot: 3
   meshPrefab: {fileID: 7651887113132511278, guid: b6a3f3a00c161594f91877902fed16ed, type: 3}
