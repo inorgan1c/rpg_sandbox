@@ -10,9 +10,16 @@ public class ItemPickup : Interactable
         PickUp();
     }
 
-    void PickUp()
+    void PickUp(Inventory inventory = null)
     {
-        bool pickedUp = Inventory.instance.AddItem(item);
+        bool pickedUp = false;
+
+        if (!inventory)
+        {
+            inventory = PlayerManager.instance.inventory;
+        }
+
+        pickedUp = inventory.AddItem(item);
         if (pickedUp)
         {
             Debug.Log("PickUp: " + item.name);

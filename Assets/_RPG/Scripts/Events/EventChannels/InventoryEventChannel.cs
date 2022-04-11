@@ -6,11 +6,15 @@ using UnityEngine.Events;
 public class InventoryEventChannel : ScriptableObject
 {
     public UnityAction OnInventoryUpdate;
-    public UnityAction<Item> OnItemPickUp;
-
+    public UnityAction<Equipment, Equipment> OnEquipmentChanged;
 
     public void RaiseInventoryUpdate()
     {
         OnInventoryUpdate?.Invoke();
+    }
+
+    public void RaiseEquipmentChanged(Equipment newItem, Equipment oldItem)
+    {
+        OnEquipmentChanged?.Invoke(newItem, oldItem);
     }
 }

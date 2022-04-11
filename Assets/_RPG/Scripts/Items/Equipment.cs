@@ -17,12 +17,27 @@ public class Equipment : Item
     public int armorModifier;
     public int damageModifier;
 
-    public override void Use()
+    public override void Use(Inventory inventory = null)
     {
         base.Use();
 
-        EquipmentManager.instance.Equip(this);
-        RemoveFromInventory();
+        if (!inventory)
+        {
+            inventory = PlayerManager.instance.inventory;
+        }
+
+        EquipmentManager equipmentManager = inventory.GetComponent<EquipmentManager>();
+        
+        if (equipmentManager)
+        {
+            equipmentManager.Equip(this);
+            RemoveFromInventory();
+        
+        } else
+        {
+            Debug.Log("Cannot equip: no equipment manager component in " + inventory.gameObject);
+        }
+        
     }
 
     public SkinnedMeshRenderer Mesh()

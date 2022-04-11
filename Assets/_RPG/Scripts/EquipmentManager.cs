@@ -10,33 +10,32 @@ public class EquipmentManager : MonoBehaviour
 
     Equipment[] currentEquipment;
     SkinnedMeshRenderer[] currentMeshes;
-    Inventory inventory;
-    public delegate void OnEquipmentChanged(Equipment newItem, Equipment oldItem);
-    public OnEquipmentChanged onEquipmentChanged;
+    public Inventory inventory { get; private set; }
+    [SerializeField] InventoryEventChannel inventoryEventChannel;
 
-    #region Singleton
-    public static EquipmentManager instance;
+    //#region Singleton
+    //public static EquipmentManager instance;
 
-    private void Awake()
-    {
-        if (!instance)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-    }
-    #endregion
+    //private void Awake()
+    //{
+    //    if (!instance)
+    //    {
+    //        instance = this;
+    //    }
+    //    else
+    //    {
+    //        Destroy(gameObject);
+    //        return;
+    //    }
+    //}
+    //#endregion
 
     private void Start()
     {
         int numSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
         currentEquipment = new Equipment[numSlots];
         currentMeshes = new SkinnedMeshRenderer[numSlots];
-        inventory = Inventory.instance;
+        inventory = PlayerManager.instance.inventory;
 
         EquipDefaultItems();
     }
@@ -59,11 +58,8 @@ public class EquipmentManager : MonoBehaviour
             inventory.AddItem(oldItem);
         }
 
-        if (onEquipmentChanged != null)
-        {
-            onEquipmentChanged.Invoke(newItem, oldItem);
-        }
-
+        inventoryEventChannel?.RaiseEquipmentChanged(newItem, oldItem);
+        
         SkinnedMeshRenderer newMesh = Instantiate<SkinnedMeshRenderer>(newItem.Mesh());
         newMesh.transform.parent = targetMesh.transform;
         newMesh.bones = targetMesh.bones;
@@ -89,10 +85,8 @@ public class EquipmentManager : MonoBehaviour
 
             SetEquipmentBlendShapes(oldItem, 0);
             inventory.AddItem(oldItem);
-            if (onEquipmentChanged != null)
-            {
-                onEquipmentChanged.Invoke(null, oldItem);
-            }
+            inventoryEventChannel?.RaiseEquipmentChanged(null, oldItem);
+            
         }
 
         currentEquipment[slotIdx] = null;

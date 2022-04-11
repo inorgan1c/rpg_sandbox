@@ -23,6 +23,13 @@ public class PlayerManager : MonoBehaviour
     #endregion
 
     public Transform player;
+    public Inventory inventory { get { return instance.player.GetComponent<Inventory>(); }}
+    public EquipmentManager equipmentManager { 
+        get { 
+            return instance.player.GetComponent<EquipmentManager>(); 
+        } 
+    }
+
     [SerializeField] StatsEventChannel statsEventChannel;
 
     private void OnEnable()
@@ -47,7 +54,7 @@ public class PlayerManager : MonoBehaviour
             player.GetComponent<PlayerStats>().UpdateXP(enemyConfig.xp);
             foreach (Item i in enemyConfig.loot)
             {
-                Inventory.instance.AddItem(i);
+                inventory.AddItem(i);
             }
         }
 

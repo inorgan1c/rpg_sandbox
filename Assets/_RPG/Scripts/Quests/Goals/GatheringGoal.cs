@@ -7,7 +7,10 @@ using UnityEngine;
 public class GatheringGoal : Quest.QuestGoal
 {
     public Item item;
+    
     [SerializeField] InventoryEventChannel inventoryEventChannel;
+    Inventory inventory;
+
 
     public override string Description()
     {
@@ -19,11 +22,12 @@ public class GatheringGoal : Quest.QuestGoal
     {
         base.Initialize();
         inventoryEventChannel.OnInventoryUpdate += OnGathering;
+        inventory = PlayerManager.instance.inventory;
     }
 
     private void OnGathering()
     {
-        CurrentAmount = Inventory.instance.GetItemAmount(item);
+        CurrentAmount = inventory.GetItemAmount(item);
         Evaluate();
     }
 }

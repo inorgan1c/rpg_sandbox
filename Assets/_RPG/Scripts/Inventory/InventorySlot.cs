@@ -23,9 +23,13 @@ public class InventorySlot : MonoBehaviour
         removeBtn.interactable = false;
     }
 
-    public void OnRemoveButton()
+    public void OnRemoveButton(Inventory inventory=null)
     {
-        Inventory.instance.RemoveItem(item);
+        if (!inventory)
+        {
+            inventory = PlayerManager.instance.inventory;
+        }
+        inventory.RemoveItem(item);
     }
 
     public void UseItem()

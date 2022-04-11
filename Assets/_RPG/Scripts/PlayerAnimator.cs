@@ -7,10 +7,24 @@ public class PlayerAnimator : CharacterAnimator
     public WeaponAnimations[] weaponAnimations;
     Dictionary<Equipment, AnimationClip[]> weaponAnimationsDict;
 
+    [SerializeField] InventoryEventChannel inventoryEventChannel;
+
+    private void OnEnable()
+    {
+        inventoryEventChannel.OnEquipmentChanged += OnEquipmentChange;
+    }
+
+    private void OnDisable()
+    {
+        if (inventoryEventChannel)
+        {
+            inventoryEventChannel.OnEquipmentChanged -= OnEquipmentChange;
+        }
+    }
+
     protected override void Start()
     {
         base.Start();
-        EquipmentManager.instance.onEquipmentChanged += OnEquipmentChange;
 
         weaponAnimationsDict = new Dictionary<Equipment, AnimationClip[]>();
         foreach (WeaponAnimations a in weaponAnimations)

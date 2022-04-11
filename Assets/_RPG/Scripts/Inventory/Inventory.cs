@@ -9,23 +9,6 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] InventoryEventChannel inventoryEventChannel;
 
-    #region Singleton
-    public static Inventory instance;
-
-    private void Awake()
-    {
-        if (!instance)
-        {
-            instance = this;
-        } else
-        {
-            Destroy(gameObject);
-            return;
-        }
-    }
-    #endregion
-
-
     public bool AddItem(Item item)
     {
         if (!item.isDefaultItem)

@@ -38,7 +38,7 @@ public class Quest : ScriptableObject
             Completed = false;
         }
 
-        protected void Evaluate()
+        public void Evaluate()
         {
             if (CurrentAmount >= requiredAmount)
             {
@@ -73,11 +73,17 @@ public class Quest : ScriptableObject
 
     private void CheckGoals()
     {
+        Debug.Log("Check goals");
         completed = goals.TrueForAll(goal => goal.Completed);
         if (completed)
         {
             //reward ... 
             questEventChannel?.RaiseQuestCompleted(this);
         }
+    }
+
+    public void EvaluateGoals()
+    {
+        goals.ForEach(g => g.Evaluate());
     }
 }

@@ -7,13 +7,18 @@ public class Item : ScriptableObject
     public Sprite icon = null;
     public bool isDefaultItem = false;
 
-    public virtual void Use()
+    public virtual void Use(Inventory inventory = null)
     {
         Debug.Log("Using: " + name);
     }
 
-    public void RemoveFromInventory()
+    public void RemoveFromInventory(Inventory inventory = null)
     {
-        Inventory.instance.RemoveItem(this);
+        if (!inventory)
+        {
+            inventory = PlayerManager.instance.inventory;
+        }
+
+        inventory.RemoveItem(this);
     }
 }
