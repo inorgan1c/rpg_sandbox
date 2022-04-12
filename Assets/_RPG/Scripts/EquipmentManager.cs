@@ -10,8 +10,8 @@ public class EquipmentManager : MonoBehaviour
 
     Equipment[] currentEquipment;
     SkinnedMeshRenderer[] currentMeshes;
-    public Inventory inventory { get; private set; }
-    [SerializeField] InventoryEventChannel inventoryEventChannel;
+    [SerializeField] EquipmentEventChannel equipmentEventChannel;
+    [SerializeField] InventorySystemEventChannel inventorySystemEventChannel;
 
     //#region Singleton
     //public static EquipmentManager instance;
@@ -35,7 +35,6 @@ public class EquipmentManager : MonoBehaviour
         int numSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
         currentEquipment = new Equipment[numSlots];
         currentMeshes = new SkinnedMeshRenderer[numSlots];
-        inventory = PlayerManager.instance.inventory;
 
         EquipDefaultItems();
     }
@@ -53,12 +52,12 @@ public class EquipmentManager : MonoBehaviour
         int slotIdx = (int)newItem.equipSlot;
         Equipment oldItem = Unequip(slotIdx);
 
-        if (oldItem != null)
+        if (oldItem != null && newItem != oldItem)
         {
-            inventory.AddItem(oldItem);
+            inventorySystemEventChannel?.RaiseLootItemEvent(oldItem);
         }
 
-        inventoryEventChannel?.RaiseEquipmentChanged(newItem, oldItem);
+        equipmentEventChannel?.RaiseEquipmentChanged(newItem, oldItem);
         
         SkinnedMeshRenderer newMesh = Instantiate<SkinnedMeshRenderer>(newItem.Mesh());
         newMesh.transform.parent = targetMesh.transform;
@@ -76,6 +75,7 @@ public class EquipmentManager : MonoBehaviour
         Equipment oldItem = currentEquipment[slotIdx];
         SkinnedMeshRenderer oldMesh = currentMeshes[slotIdx];
 
+
         if (oldItem != null)
         {
             if (oldMesh != null)
@@ -84,9 +84,12 @@ public class EquipmentManager : MonoBehaviour
             }
 
             SetEquipmentBlendShapes(oldItem, 0);
-            inventory.AddItem(oldItem);
-            inventoryEventChannel?.RaiseEquipmentChanged(null, oldItem);
-            
+            equipmentEventChannel?.RaiseEquipmentChanged(null, oldItem);
+
+            if (!oldItem.isDefaultItem)
+            {
+                inventorySystemEventChannel?.RaiseLootItemEvent(oldItem);
+            }
         }
 
         currentEquipment[slotIdx] = null;

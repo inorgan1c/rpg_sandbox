@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using InventorySystem;
 using UnityEngine;
+
 
 [CreateAssetMenu(fileName = "New Gather Goal", menuName = "Quests/Goals/Gather Goal")]
 
 public class GatheringGoal : Quest.QuestGoal
 {
     public Item item;
-    
-    [SerializeField] InventoryEventChannel inventoryEventChannel;
+
+    [SerializeField] InventorySystemEventChannel inventorySystemEventChannel;
     Inventory inventory;
 
 
@@ -21,13 +21,22 @@ public class GatheringGoal : Quest.QuestGoal
     public override void Initialize()
     {
         base.Initialize();
-        inventoryEventChannel.OnInventoryUpdate += OnGathering;
-        inventory = PlayerManager.instance.inventory;
+        inventorySystemEventChannel.OnLootItem += OnGathering;
+        inventory = PlayerManager.instance.player.GetComponent<InventoryHolder>()?.Inventory;
     }
 
-    private void OnGathering()
+    private void OnGathering(Item lootItem, int quantity)
     {
-        CurrentAmount = inventory.GetItemAmount(item);
-        Evaluate();
+        InventorySlot slot = inventory.FindFirst(s => (s.Item != null) && (s.Item == item));
+        if (slot != null)
+        {
+            Debug.Log(slot.Item + " " + slot.Quantity);
+            CurrentAmount = slot.Quantity;
+            Evaluate();
+        }
+        else
+        {
+            CurrentAmount = 0;
+        }
     }
 }

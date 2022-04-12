@@ -41,6 +41,7 @@ namespace InventorySystem
                 {
                     Clear();
                 }
+                _item.Use();
                 OnItemChange?.Invoke();
 
             }

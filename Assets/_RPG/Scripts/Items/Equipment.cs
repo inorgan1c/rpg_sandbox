@@ -17,25 +17,19 @@ public class Equipment : Item
     public int armorModifier;
     public int damageModifier;
 
-    public override void Use(Inventory inventory = null)
+    public override void Use()
     {
         base.Use();
 
-        if (!inventory)
-        {
-            inventory = PlayerManager.instance.inventory;
-        }
-
-        EquipmentManager equipmentManager = inventory.GetComponent<EquipmentManager>();
+        EquipmentManager equipmentManager = PlayerManager.instance.GetComponent<EquipmentManager>();
         
         if (equipmentManager)
         {
             equipmentManager.Equip(this);
-            RemoveFromInventory();
         
         } else
         {
-            Debug.Log("Cannot equip: no equipment manager component in " + inventory.gameObject);
+            Debug.Log("Cannot equip: no equipment manager component");
         }
         
     }

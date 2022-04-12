@@ -21,5 +21,5 @@ MonoBehaviour:
   goals:
   - {fileID: 11400000, guid: 4912b5fbb6da1a14a88f01a6608478b7, type: 2}
   - {fileID: 11400000, guid: ea79ba9ec8e284e4b88ad1d3458d4672, type: 2}
-  completed: 0
+  completed: 1
   questEventChannel: {fileID: 11400000, guid: 0d3cdd96c65dbf14d9940f56ea71216a, type: 2}

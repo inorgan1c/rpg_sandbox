@@ -6,7 +6,7 @@ public class Consumable : Item
     public int healthModifier = 20; 
     public int energyModifier = 20; 
 
-    public override void Use(Inventory inventory = null)
+    public override void Use()
     {
         base.Use();
 
@@ -15,6 +15,5 @@ public class Consumable : Item
         PlayerStats pstats = stats as PlayerStats;
         stats.Heal(healthModifier);
         pstats.RestoreEnergy(energyModifier);
-        RemoveFromInventory(inventory);
     }
 }

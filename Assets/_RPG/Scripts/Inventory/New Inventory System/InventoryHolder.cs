@@ -28,17 +28,18 @@ public class InventoryHolder : MonoBehaviour
         {
             _inventory.CreateSlot();
         }
-
     }
 
     private void OnLoot(Item item, int quantity)
     {
-        InventorySystem.InventorySlot slot = _inventory.FindFirst(slot => slot.Item == item || slot.Item == null);
+        Debug.Log("Loot " + item);
 
+        InventorySystem.InventorySlot slot = _inventory.FindFirst(slot => slot.Item == item || slot.Item == null);
         if (slot == null && CanCreateSlots)
         {
             slot = _inventory.CreateSlot();
         }
+
         slot?.StoreItem(item, quantity);
     }
 }

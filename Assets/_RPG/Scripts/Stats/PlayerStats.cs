@@ -10,20 +10,20 @@ public class PlayerStats : CharacterStats
     public TimedStat energy;
 
     [SerializeField] TimeEventChannel timeEventChannel;
-    [SerializeField] InventoryEventChannel inventoryEventChannel;
+    [SerializeField] EquipmentEventChannel equipmentEventChannel;
 
     private void OnEnable()
     {
-        inventoryEventChannel.OnEquipmentChanged += OnEquipmentChanged;
+        equipmentEventChannel.OnEquipmentChanged += OnEquipmentChanged;
         timeEventChannel.OnNewHour += OnNewHour;
         timeEventChannel.OnNewDay += OnNewDay; //temporary!!! fixed when sleep time will be implemented
     }
 
     private void OnDisable()
     {
-        if (inventoryEventChannel)
+        if (equipmentEventChannel)
         {
-            inventoryEventChannel.OnEquipmentChanged += OnEquipmentChanged;
+            equipmentEventChannel.OnEquipmentChanged += OnEquipmentChanged;
         }
 
         if (timeEventChannel)

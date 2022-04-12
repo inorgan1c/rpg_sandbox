@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c9043cf1ef58384085d517ffcc66aab, type: 3}
-  m_Name: InventoryEventChannel
+  m_Script: {fileID: 11500000, guid: 9ad1d3201451a9242a3b82323ff54359, type: 3}
+  m_Name: Equipment Event Channel
   m_EditorClassIdentifier: 

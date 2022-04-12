@@ -31,7 +31,6 @@ public class QuestUI : MonoBehaviour
         {
             GameObject newSlot = Instantiate(slotPrefab, slotsParent);
             newSlot.GetComponent<QuestSlot>().SetInfo(quest.info);
-            quest.EvaluateGoals();
 
         } else
         {

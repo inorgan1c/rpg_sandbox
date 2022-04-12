@@ -73,7 +73,6 @@ public class Quest : ScriptableObject
 
     private void CheckGoals()
     {
-        Debug.Log("Check goals");
         completed = goals.TrueForAll(goal => goal.Completed);
         if (completed)
         {
@@ -82,8 +81,4 @@ public class Quest : ScriptableObject
         }
     }
 
-    public void EvaluateGoals()
-    {
-        goals.ForEach(g => g.Evaluate());
-    }
 }

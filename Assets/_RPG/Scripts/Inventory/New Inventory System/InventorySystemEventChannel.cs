@@ -27,6 +27,7 @@ public class InventorySystemEventChannel : ScriptableObject
 
     public void RaiseUseItem(Item item)
     {
+        Debug.Log("USEITEM");
         OnUseItem?.Invoke(item, 1);
 
     }

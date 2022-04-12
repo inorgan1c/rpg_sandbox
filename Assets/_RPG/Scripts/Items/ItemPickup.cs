@@ -1,8 +1,10 @@
 using UnityEngine;
+using InventorySystem;
 
 public class ItemPickup : Interactable
 {
     public Item item;
+    [SerializeField] InventorySystemEventChannel inventorySystemEventChannel;
 
     public override void Interact()
     {
@@ -10,20 +12,9 @@ public class ItemPickup : Interactable
         PickUp();
     }
 
-    void PickUp(Inventory inventory = null)
+    void PickUp()
     {
-        bool pickedUp = false;
-
-        if (!inventory)
-        {
-            inventory = PlayerManager.instance.inventory;
-        }
-
-        pickedUp = inventory.AddItem(item);
-        if (pickedUp)
-        {
-            Debug.Log("PickUp: " + item.Name);
-            Destroy(gameObject);
-        }
+        inventorySystemEventChannel.RaiseLootItemEvent(item);
+        Destroy(gameObject);
     }
 }

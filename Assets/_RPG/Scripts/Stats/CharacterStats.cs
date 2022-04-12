@@ -22,7 +22,6 @@ public class CharacterStats : MonoBehaviour
         
 
         currentHealth -= damage;
-        Debug.Log(transform.name + " takes " + damage + " damage. Health: "+currentHealth);
         statsEventChannel?.RaiseHealthChanged(gameObject.GetInstanceID(), maxHealth, currentHealth);
         
         if (currentHealth <= 0)
