@@ -79,18 +79,32 @@ public class Perception : MonoBehaviour
     }
 
 
-    public void FaceTarget(Vector3 targetPosition)
+    public static Quaternion FaceTarget(Transform thisTransform, Vector3 targetPosition, bool slerp=true)
     {
-        Vector3 direction = (targetPosition - transform.position).normalized;
+        Vector3 direction = (targetPosition - thisTransform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+
+        if (slerp)
+        {
+            return Quaternion.Slerp(thisTransform.rotation, lookRotation, Time.deltaTime * 5f);
+        } else
+        {
+            return lookRotation;
+        }
     }
 
-    public void EscapeTarget(Vector3 targetPosition)
+    public static Quaternion EscapeTarget(Transform thisTransform, Vector3 targetPosition, bool slerp=true)
     {
-        Vector3 direction = -1*(targetPosition - transform.position).normalized;
+        Vector3 direction = -1*(targetPosition - thisTransform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        
+        if (slerp)
+        {
+            return Quaternion.Slerp(thisTransform.rotation, lookRotation, Time.deltaTime * 5f);
+        } else
+        {
+            return lookRotation;
+        }
     }
 
     private void OnDrawGizmosSelected()

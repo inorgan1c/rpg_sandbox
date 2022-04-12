@@ -27,7 +27,7 @@ public class EscapeState : FSMState
 
 
     public override void OnEnter() {
-        perception.EscapeTarget(target.position);
+        agent.transform.rotation = Perception.EscapeTarget(agent.transform, target.position);
         agent.isStopped = false;
         agent.speed = agent.speed * runMultiplier;
     }
@@ -37,7 +37,7 @@ public class EscapeState : FSMState
         agent.isStopped = true;
     }
     public override void DoAction() {
-        perception.EscapeTarget(target.position);
+        agent.transform.rotation = Perception.EscapeTarget(agent.transform, target.position);
     }
 
     public override FSMStateType ShouldTransitionToState() {

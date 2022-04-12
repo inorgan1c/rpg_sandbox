@@ -13,22 +13,6 @@ public class EquipmentManager : MonoBehaviour
     [SerializeField] EquipmentEventChannel equipmentEventChannel;
     [SerializeField] InventorySystemEventChannel inventorySystemEventChannel;
 
-    //#region Singleton
-    //public static EquipmentManager instance;
-
-    //private void Awake()
-    //{
-    //    if (!instance)
-    //    {
-    //        instance = this;
-    //    }
-    //    else
-    //    {
-    //        Destroy(gameObject);
-    //        return;
-    //    }
-    //}
-    //#endregion
 
     private void Start()
     {
@@ -52,7 +36,7 @@ public class EquipmentManager : MonoBehaviour
         int slotIdx = (int)newItem.equipSlot;
         Equipment oldItem = Unequip(slotIdx);
 
-        if (oldItem != null && newItem != oldItem)
+        if (oldItem != null && newItem != oldItem && !oldItem.isDefaultItem)
         {
             inventorySystemEventChannel?.RaiseLootItemEvent(oldItem);
         }

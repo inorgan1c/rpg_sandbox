@@ -6,7 +6,6 @@ public class QuestManager : MonoBehaviour
 {
     public List<Quest> quests;
 
-    [SerializeField] GameObject questUI;
     [SerializeField] QuestCompleteDialogue questCompleteDialogue;
     [SerializeField] QuestEventChannel questEventChannel;
     [SerializeField] DialogueEventChannel dialogueEventChannel;
@@ -27,7 +26,6 @@ public class QuestManager : MonoBehaviour
     {
         q.Initialize();
         quests.Add(q);
-        Debug.Log("Quest received: " + q.info.title);
     } 
 
     void MarkCompleted(Quest q)
@@ -38,14 +36,6 @@ public class QuestManager : MonoBehaviour
             questCompleteDialogue.Init(q.info.title, q.reward.xp);
             dialogueEventChannel.OnStartDialogue(questCompleteDialogue);
             questEventChannel?.RaiseQuestCompleted(q);
-        }
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            questUI.SetActive(!questUI.activeSelf);
         }
     }
 }

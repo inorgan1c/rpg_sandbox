@@ -5,16 +5,21 @@ using UnityEngine;
 
 public class InventoryUIController : MonoBehaviour
 {
+    [SerializeField] GameObject inventoryUIPanel;
     [SerializeField] private InventoryUIEventChannel inventoryUIEventChannel;
     [SerializeField] private InventorySlotUIController slotUIPrefab;
 
-    public InventorySystem.Inventory _displayedInventory;
-    public InventorySystem.Inventory DisplayedInventory => _displayedInventory;
+    Inventory _displayedInventory;
+    public Inventory DisplayedInventory => _displayedInventory;
 
     private void Awake()
     {
         inventoryUIEventChannel.OnInventoryToggle += OnInventoryToggle;
-        gameObject.SetActive(false);
+        if (!inventoryUIPanel)
+        {
+            inventoryUIPanel = gameObject;
+        }
+        inventoryUIPanel.SetActive(false);
     }
 
     private void OnDestroy()
@@ -26,7 +31,7 @@ public class InventoryUIController : MonoBehaviour
     {
         if (_displayedInventory == null)
         {
-            gameObject.SetActive(true);
+            inventoryUIPanel.SetActive(true);
             _displayedInventory = inventoryHolder.Inventory;
             _displayedInventory.OnSlotAdded += CreateSlotController;
             _displayedInventory.OnSlotRemoved += DestroySlotController;
@@ -34,7 +39,7 @@ public class InventoryUIController : MonoBehaviour
         
         } else if (_displayedInventory == inventoryHolder.Inventory)
         {
-            gameObject.SetActive(false);
+            inventoryUIPanel.SetActive(false);
             _displayedInventory.OnSlotAdded -= CreateSlotController;
             _displayedInventory.OnSlotRemoved -= DestroySlotController;
             _displayedInventory = null;
@@ -42,17 +47,17 @@ public class InventoryUIController : MonoBehaviour
                 GetComponentsInChildren<InventorySlotUIController>()) {
                 
                 Destroy(slot.gameObject); 
-            } ;
+            };
         }
     }
 
-    private void CreateSlotController(InventorySystem.InventorySlot slot)
+    private void CreateSlotController(InventorySlot slot)
     {
         InventorySlotUIController slotUIController = Instantiate(slotUIPrefab, transform);
         slotUIController.Slot = slot;
     }
 
-    private void DestroySlotController(InventorySystem.InventorySlot slot)
+    private void DestroySlotController(InventorySlot slot)
     {
         InventorySlotUIController[] slots = GetComponentsInChildren<InventorySlotUIController>();
         InventorySlotUIController found = Array.Find(slots, s => slot.Item == s.Slot.Item);

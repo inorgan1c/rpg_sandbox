@@ -9,8 +9,8 @@ public class InventorySlotUIController : MonoBehaviour
     [SerializeField] private Button _removeBtn;
     [SerializeField] private Text _quantityText;
 
-    private InventorySystem.InventorySlot _slot;
-    public InventorySystem.InventorySlot Slot
+    private InventorySlot _slot;
+    public InventorySlot Slot
     {
         get { return _slot; }
         set
@@ -52,19 +52,30 @@ public class InventorySlotUIController : MonoBehaviour
         }
     }
 
+    public void Clear()
+    {
+        if (_slot != null)
+        {
+            _slot.Clear();
+        }
+    }
+
+    
     private void UpdateSlot()
     {
         bool display = _slot != null && _slot.Item != null && _slot.Quantity > 0;
 
         if (_icon != null)
         {
+            Debug.Log("ICON: " + _icon.sprite);
             _icon.gameObject.SetActive(display);
             _icon.sprite = display ? _slot.Item.Icon : null;
         }
 
         if (_quantityText != null)
         {
-             _quantityText.gameObject.SetActive(display);
+            Debug.Log("Quantity: " + _quantityText.text);
+            _quantityText.gameObject.SetActive(display);
             _quantityText.text = display ?_slot.Quantity.ToString() : "";
 
         }

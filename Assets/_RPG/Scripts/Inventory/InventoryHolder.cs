@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryHolder : MonoBehaviour
@@ -8,8 +6,8 @@ public class InventoryHolder : MonoBehaviour
     [SerializeField] private int DefaultSlotsCount = 0;
     [SerializeField] private bool CanCreateSlots = false;
 
-    private InventorySystem.Inventory _inventory = new InventorySystem.Inventory();
-    public InventorySystem.Inventory Inventory => _inventory;
+    private Inventory _inventory = new Inventory();
+    public Inventory Inventory => _inventory;
 
     private void Awake()
     {
@@ -34,7 +32,7 @@ public class InventoryHolder : MonoBehaviour
     {
         Debug.Log("Loot " + item);
 
-        InventorySystem.InventorySlot slot = _inventory.FindFirst(slot => slot.Item == item || slot.Item == null);
+        InventorySlot slot = _inventory.FindFirst(slot => slot.Item == item || slot.Item == null);
         if (slot == null && CanCreateSlots)
         {
             slot = _inventory.CreateSlot();

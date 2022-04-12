@@ -1,6 +1,3 @@
-using InventorySystem;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -27,10 +24,6 @@ public class InventorySystemEventChannel : ScriptableObject
 
     public void RaiseUseItem(Item item)
     {
-        Debug.Log("USEITEM");
         OnUseItem?.Invoke(item, 1);
-
     }
-
-
 }

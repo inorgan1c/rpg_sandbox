@@ -37,7 +37,7 @@ public class AttackState : FSMState
             agent.SetDestination(target.position);
         } else
         {
-            perception.FaceTarget(target.position);
+            agent.transform.rotation = Perception.FaceTarget(agent.transform, target.position);
             combat.Attack(targetStats);
         }
     }

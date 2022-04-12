@@ -48,6 +48,7 @@ public class Quest : ScriptableObject
 
         private void Complete()
         {
+            Debug.Log(Description() + " Completed");
             Completed = true;
             questEventChannel?.RaiseQuestGoalCompleted();
         }
@@ -71,7 +72,7 @@ public class Quest : ScriptableObject
         questEventChannel.OnQuestGoalCompleted += CheckGoals;
     }
 
-    private void CheckGoals()
+    public void CheckGoals()
     {
         completed = goals.TrueForAll(goal => goal.Completed);
         if (completed)

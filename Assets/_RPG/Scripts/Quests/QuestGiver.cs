@@ -10,6 +10,9 @@ public class QuestGiver : DialogueTrigger
 
     public override void Interact()
     {
+        Transform player = PlayerManager.instance.player;
+        transform.rotation = Perception.FaceTarget(transform, player.position, false);
+
         if (dialogue)
         {
             base.Interact();
@@ -28,6 +31,8 @@ public class QuestGiver : DialogueTrigger
         {
             questEventChannel?.RaiseQuestStarted(quest);
             dialogueEventChannel.OnEndDialogue -= AssignQuest;
+
+            dialogue = null;
             quest = null;
         }
     }

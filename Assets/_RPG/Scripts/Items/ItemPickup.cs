@@ -1,5 +1,4 @@
 using UnityEngine;
-using InventorySystem;
 
 public class ItemPickup : Interactable
 {

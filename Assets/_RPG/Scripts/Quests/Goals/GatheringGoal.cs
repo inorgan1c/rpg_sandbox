@@ -1,4 +1,3 @@
-using InventorySystem;
 using UnityEngine;
 
 
@@ -23,6 +22,7 @@ public class GatheringGoal : Quest.QuestGoal
         base.Initialize();
         inventorySystemEventChannel.OnLootItem += OnGathering;
         inventory = PlayerManager.instance.player.GetComponent<InventoryHolder>()?.Inventory;
+        OnGathering(null, 0);
     }
 
     private void OnGathering(Item lootItem, int quantity)
@@ -30,7 +30,6 @@ public class GatheringGoal : Quest.QuestGoal
         InventorySlot slot = inventory.FindFirst(s => (s.Item != null) && (s.Item == item));
         if (slot != null)
         {
-            Debug.Log(slot.Item + " " + slot.Quantity);
             CurrentAmount = slot.Quantity;
             Evaluate();
         }

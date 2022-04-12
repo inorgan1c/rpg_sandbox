@@ -22,7 +22,7 @@ public class ChaseState : FSMState
 
     public override void DoAction()
     {
-        perception.FaceTarget(perception.lastSighting);
+        agent.transform.rotation = Perception.FaceTarget(agent.transform, perception.lastSighting);
     }
 
     public override void OnEnter()

@@ -10,8 +10,21 @@ public class QuestUI : MonoBehaviour
     public Text clock;
 
     [SerializeField] GameObject slotPrefab;
+    [SerializeField] GameObject journalPanel;
     [SerializeField] TimeEventChannel timeEventChannel;
     [SerializeField] QuestEventChannel questEventChannel;
+    [SerializeField] QuestUIEventChannel questUIEventChannel;
+
+
+    private void Awake()
+    {
+        questUIEventChannel.OnJournalToggle += ToggleJournal;
+    }
+
+    private void OnDestroy()
+    {
+        questUIEventChannel.OnJournalToggle -= ToggleJournal;
+    }
 
     private void Start()
     {
@@ -20,7 +33,20 @@ public class QuestUI : MonoBehaviour
         timeEventChannel.OnNewDay += UpdateCalendar;
         timeEventChannel.OnNewHour += UpdateClock;
 
-        gameObject.SetActive(false);
+        if (!journalPanel)
+        {
+            journalPanel = gameObject;
+        }
+
+        UpdateCalendar();
+        UpdateClock();
+        ToggleJournal();
+    }
+
+
+    void ToggleJournal()
+    {
+        journalPanel.SetActive(!journalPanel.activeSelf);
     }
 
 
@@ -31,6 +57,7 @@ public class QuestUI : MonoBehaviour
         {
             GameObject newSlot = Instantiate(slotPrefab, slotsParent);
             newSlot.GetComponent<QuestSlot>().SetInfo(quest.info);
+            quest.CheckGoals();
 
         } else
         {
