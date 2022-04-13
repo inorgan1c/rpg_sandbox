@@ -11,4 +11,4 @@ A simple Unity sandbox project developed to test some common RPG game mechanics:
 - Event Channel System
 
 
-<img src="https://user-images.githubusercontent.com/102490095/163072301-39a08ffd-a7aa-44c1-a1ba-533062fa13ef.JPG" width="640px" height="480px">
+<img src="https://user-images.githubusercontent.com/102490095/163072301-39a08ffd-a7aa-44c1-a1ba-533062fa13ef.JPG" width="640px">
