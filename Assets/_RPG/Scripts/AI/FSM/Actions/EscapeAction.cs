@@ -12,6 +12,12 @@ public class EscapeAction : FSMAction
 
     private void Escape(CharacterBehaviourFSM controller)
     {
-        controller.agent.transform.rotation = Perception.EscapeTarget(controller.agent.transform, controller.target.position);
+        if (controller.agent.remainingDistance <= controller.agent.stoppingDistance)
+        {
+            controller.agent.transform.rotation = Perception.EscapeTarget(controller.agent.transform, controller.target.position);
+            controller.currentDest = controller.agent.transform.forward * controller.perception.sightRadius;
+            controller.agent.SetDestination(controller.currentDest);
+
+        }
     }
 }

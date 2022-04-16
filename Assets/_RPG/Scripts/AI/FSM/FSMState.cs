@@ -24,6 +24,9 @@ public abstract class FSMState : ScriptableObject
             if (decision)
             {
                 controller.TransitionToState(transition.trueState);
+            } else
+            {
+                controller.TransitionToState(transition.falseState);
             }
         }
     }

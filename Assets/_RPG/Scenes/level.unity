@@ -157,7 +157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3387105}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -17.5, y: -1.72, z: 4.4}
+  m_LocalPosition: {x: -17.5, y: -1.72, z: 56.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 185838164}
@@ -193,21 +193,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startState: {fileID: 11400000, guid: 8644e15b3c5101f44b6c0c6ba0648ad8, type: 2}
-  statePool: []
   emptyState: {fileID: 11400000, guid: d28fde855e34d4342b1dcaed18c8079d, type: 2}
   startPos: {x: 0, y: 0, z: 0}
   currentDest: {x: 0, y: 0, z: 0}
   agent: {fileID: 0}
   perception: {fileID: 0}
   targetTag: Player
-  runMultiplier: 3
   target: {fileID: 1718770405}
   stats: {fileID: 0}
   isAttacking: 0
   combat: {fileID: 0}
   targetStats: {fileID: 0}
-  patrolAreaRadius: 5
-  maxWaitPeriod: 0
   currentWait: 0
 --- !u!114 &3387109
 MonoBehaviour:
@@ -290,8 +286,8 @@ MonoBehaviour:
     baseValue: 5
   damage:
     baseValue: 3
-  statsEventChannel: {fileID: 11400000, guid: c1a2ebb6760239646836dcd1eda8ce8c, type: 2}
   config: {fileID: 11400000, guid: ff62c18dedeb235448fd015ede5f69cd, type: 2}
+  statsEventChannel: {fileID: 11400000, guid: c1a2ebb6760239646836dcd1eda8ce8c, type: 2}
 --- !u!195 &3387114
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1639,21 +1635,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startState: {fileID: 11400000, guid: 8644e15b3c5101f44b6c0c6ba0648ad8, type: 2}
-  statePool: []
   emptyState: {fileID: 11400000, guid: d28fde855e34d4342b1dcaed18c8079d, type: 2}
   startPos: {x: 0, y: 0, z: 0}
   currentDest: {x: 0, y: 0, z: 0}
   agent: {fileID: 0}
   perception: {fileID: 0}
   targetTag: Player
-  runMultiplier: 3
   target: {fileID: 1718770405}
   stats: {fileID: 0}
   isAttacking: 0
   combat: {fileID: 0}
   targetStats: {fileID: 0}
-  patrolAreaRadius: 5
-  maxWaitPeriod: 0
   currentWait: 0
 --- !u!114 &136383157
 MonoBehaviour:
@@ -1736,8 +1728,8 @@ MonoBehaviour:
     baseValue: 5
   damage:
     baseValue: 3
-  statsEventChannel: {fileID: 11400000, guid: c1a2ebb6760239646836dcd1eda8ce8c, type: 2}
   config: {fileID: 11400000, guid: ff62c18dedeb235448fd015ede5f69cd, type: 2}
+  statsEventChannel: {fileID: 11400000, guid: c1a2ebb6760239646836dcd1eda8ce8c, type: 2}
 --- !u!195 &136383162
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -9482,21 +9474,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startState: {fileID: 11400000, guid: 8644e15b3c5101f44b6c0c6ba0648ad8, type: 2}
-  statePool: []
   emptyState: {fileID: 11400000, guid: d28fde855e34d4342b1dcaed18c8079d, type: 2}
   startPos: {x: 0, y: 0, z: 0}
   currentDest: {x: 0, y: 0, z: 0}
   agent: {fileID: 0}
   perception: {fileID: 0}
   targetTag: Player
-  runMultiplier: 3
   target: {fileID: 1718770405}
   stats: {fileID: 0}
   isAttacking: 0
   combat: {fileID: 0}
   targetStats: {fileID: 0}
-  patrolAreaRadius: 5
-  maxWaitPeriod: 0
   currentWait: 0
 --- !u!114 &1154234571
 MonoBehaviour:
@@ -9579,8 +9567,8 @@ MonoBehaviour:
     baseValue: 5
   damage:
     baseValue: 3
-  statsEventChannel: {fileID: 11400000, guid: c1a2ebb6760239646836dcd1eda8ce8c, type: 2}
   config: {fileID: 11400000, guid: ff62c18dedeb235448fd015ede5f69cd, type: 2}
+  statsEventChannel: {fileID: 11400000, guid: c1a2ebb6760239646836dcd1eda8ce8c, type: 2}
 --- !u!195 &1154234576
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -13003,21 +12991,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startState: {fileID: 11400000, guid: 8644e15b3c5101f44b6c0c6ba0648ad8, type: 2}
-  statePool: []
   emptyState: {fileID: 11400000, guid: d28fde855e34d4342b1dcaed18c8079d, type: 2}
   startPos: {x: 0, y: 0, z: 0}
   currentDest: {x: 0, y: 0, z: 0}
   agent: {fileID: 0}
   perception: {fileID: 0}
   targetTag: Player
-  runMultiplier: 3
   target: {fileID: 1718770405}
   stats: {fileID: 0}
   isAttacking: 0
   combat: {fileID: 0}
   targetStats: {fileID: 0}
-  patrolAreaRadius: 5
-  maxWaitPeriod: 0
   currentWait: 0
 --- !u!114 &1642360931
 MonoBehaviour:
@@ -13100,8 +13084,8 @@ MonoBehaviour:
     baseValue: 5
   damage:
     baseValue: 3
-  statsEventChannel: {fileID: 11400000, guid: c1a2ebb6760239646836dcd1eda8ce8c, type: 2}
   config: {fileID: 11400000, guid: ff62c18dedeb235448fd015ede5f69cd, type: 2}
+  statsEventChannel: {fileID: 11400000, guid: c1a2ebb6760239646836dcd1eda8ce8c, type: 2}
 --- !u!195 &1642360936
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -14089,6 +14073,7 @@ MonoBehaviour:
     baseValue: 0
   damage:
     baseValue: 6
+  config: {fileID: 0}
   statsEventChannel: {fileID: 11400000, guid: c1a2ebb6760239646836dcd1eda8ce8c, type: 2}
   energy:
     baseValue: 10
@@ -19174,7 +19159,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7140390803257306122, guid: 34d6bee85f85e8443bc3cbb2ab599268, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.4
+      value: -6.8
       objectReference: {fileID: 0}
     - target: {fileID: 7140390803257306122, guid: 34d6bee85f85e8443bc3cbb2ab599268, type: 3}
       propertyPath: m_LocalPosition.y
@@ -19182,7 +19167,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7140390803257306122, guid: 34d6bee85f85e8443bc3cbb2ab599268, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 32
+      value: 53.6
       objectReference: {fileID: 0}
     - target: {fileID: 7140390803257306122, guid: 34d6bee85f85e8443bc3cbb2ab599268, type: 3}
       propertyPath: m_LocalRotation.w

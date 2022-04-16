@@ -16,3 +16,6 @@ MonoBehaviour:
   xp: 30
   loot:
   - {fileID: 11400000, guid: c1ad0a6b973d2824995f1c858bf09608, type: 2}
+  runMultiplier: 3
+  patrolAreaRadius: 10
+  maxWaitPeriod: 5

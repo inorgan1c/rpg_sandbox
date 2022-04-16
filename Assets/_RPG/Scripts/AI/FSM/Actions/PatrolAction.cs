@@ -20,7 +20,7 @@ public class PatrolAction : FSMAction
 
     private Vector3 GetRandomDestination(CharacterBehaviourFSM controller)
     {
-        Vector2 randDir = Random.insideUnitCircle * controller.patrolAreaRadius;
+        Vector2 randDir = Random.insideUnitCircle * controller.stats.Config.patrolAreaRadius;
         return new Vector3(randDir.x, 0, randDir.y);
     }
 }

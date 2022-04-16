@@ -7,7 +7,9 @@ public class CharacterStats : MonoBehaviour
 
     public Stat armor;
     public Stat damage;
+    public CharacterConfig Config => config;
 
+    [SerializeField] CharacterConfig config;
     [SerializeField] protected StatsEventChannel statsEventChannel;
 
     private void Awake()

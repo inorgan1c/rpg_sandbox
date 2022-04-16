@@ -32,7 +32,6 @@ public class QuestManager : MonoBehaviour
     {
         if (quests.Remove(q))
         {
-            Debug.Log(q.info.title + " " + q.completed);
             questCompleteDialogue.Init(q.info.title, q.reward.xp);
             dialogueEventChannel.OnStartDialogue(questCompleteDialogue);
             questEventChannel?.RaiseQuestCompleted(q);

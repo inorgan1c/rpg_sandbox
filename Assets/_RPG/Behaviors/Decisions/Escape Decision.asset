@@ -9,13 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd63e9ec5c48891428a28db39e0b9827, type: 3}
-  m_Name: Skeleton
+  m_Script: {fileID: 11500000, guid: e8ea3684da30c8e4b83915f76741bbf5, type: 3}
+  m_Name: Escape Decision
   m_EditorClassIdentifier: 
-  charClass: 0
-  xp: 100
-  loot:
-  - {fileID: 11400000, guid: 69288b713a90ee6479cfe9005db37b22, type: 2}
-  runMultiplier: 1.5
-  patrolAreaRadius: 5
-  maxWaitPeriod: 0

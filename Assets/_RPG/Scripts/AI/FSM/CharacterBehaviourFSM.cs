@@ -13,14 +13,11 @@ public class CharacterBehaviourFSM : MonoBehaviour
     public NavMeshAgent agent;
     public Perception perception;
     public string targetTag = "Player";
-    public float runMultiplier = 3f;
     public Transform target;
     public CharacterStats stats;
     public bool isAttacking = false;
     public CharacterCombat combat;
     public CharacterStats targetStats;
-    public float patrolAreaRadius;
-    public float maxWaitPeriod;
     public float currentWait;
 
     // Start is called before the first frame update
@@ -31,8 +28,8 @@ public class CharacterBehaviourFSM : MonoBehaviour
         perception = GetComponent<Perception>();
         target = PlayerManager.instance.player;
         targetStats = target.GetComponent<CharacterStats>();
+        stats = GetComponent<CharacterStats>();
         combat = GetComponent<CharacterCombat>();
-
         currentState = emptyState;
         TransitionToState(startState);
     }

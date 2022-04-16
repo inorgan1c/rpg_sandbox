@@ -17,7 +17,7 @@ public class WanderAction : FSMAction
             if (controller.currentWait <= 0)
             {
                 controller.agent.SetDestination(controller.startPos + GetRandomDestination(controller));
-                controller.currentWait = Random.Range(0.0f, controller.maxWaitPeriod);
+                controller.currentWait = Random.Range(0.0f, controller.stats.Config.maxWaitPeriod);
             }
             else
             {
@@ -28,7 +28,7 @@ public class WanderAction : FSMAction
 
     private Vector3 GetRandomDestination(CharacterBehaviourFSM controller)
     {
-        Vector2 randDir = Random.insideUnitCircle * controller.patrolAreaRadius;
+        Vector2 randDir = Random.insideUnitCircle * controller.stats.Config.patrolAreaRadius;
         return new Vector3(randDir.x, 0, randDir.y);
     }
 }
