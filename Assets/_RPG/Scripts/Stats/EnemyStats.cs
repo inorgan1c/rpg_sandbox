@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class EnemyStats : CharacterStats
 {
-    [SerializeField] CharacterConfig config;
-
     public override void Die()
     {
-        statsEventChannel.RaiseEnemyDeath(config);
+        statsEventChannel.RaiseEnemyDeath(Config);
 
         base.Die();
         Destroy(gameObject);

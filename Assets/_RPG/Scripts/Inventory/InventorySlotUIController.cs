@@ -67,14 +67,12 @@ public class InventorySlotUIController : MonoBehaviour
 
         if (_icon != null)
         {
-            Debug.Log("ICON: " + _icon.sprite);
             _icon.gameObject.SetActive(display);
             _icon.sprite = display ? _slot.Item.Icon : null;
         }
 
         if (_quantityText != null)
         {
-            Debug.Log("Quantity: " + _quantityText.text);
             _quantityText.gameObject.SetActive(display);
             _quantityText.text = display ?_slot.Quantity.ToString() : "";
 

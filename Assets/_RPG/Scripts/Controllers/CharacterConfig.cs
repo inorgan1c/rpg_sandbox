@@ -14,4 +14,7 @@ public class CharacterConfig : ScriptableObject
     public CharacterClassType charClass;
     public int xp;
     public List<Item> loot;
+    public float runMultiplier;
+    public float patrolAreaRadius;
+    public float maxWaitPeriod;
 }

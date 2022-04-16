@@ -1,7 +1,7 @@
 # rpg_sandbox
 
 A simple Unity sandbox project developed to test some common RPG game mechanics:
-- Navmesh Agenty based player controller
+- Navmesh Agent based player controller
 - Scriptable Object items and equipments
 - Pluggable AI (FSM with scriptable objects)
 - Inventory system

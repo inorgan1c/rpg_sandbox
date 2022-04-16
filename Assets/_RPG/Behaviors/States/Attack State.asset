@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c706780245fec4ebd82d6fd31679d9, type: 3}
   m_Name: Attack State
   m_EditorClassIdentifier: 
-  escapeDist: 10
-  targetTag: Player
+  actions:
+  - {fileID: 11400000, guid: 2f44ef541bd8c9b468ff2504e6077cd7, type: 2}
+  transitions:
+  - decision: {fileID: 11400000, guid: 7e4c3a5884eeb034f8b42bcc5b49935b, type: 2}
+    trueState: {fileID: 11400000}
+    falseState: {fileID: 11400000, guid: f66eff342c4df34408b6bb4f4d11e7db, type: 2}

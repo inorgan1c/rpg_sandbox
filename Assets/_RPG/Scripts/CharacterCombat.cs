@@ -37,7 +37,6 @@ public class CharacterCombat : MonoBehaviour
     {
         if (attackCoolDown <= 0)
         {
-            Debug.Log(targetStats.gameObject.name);
             opponentStats = targetStats;
             if (OnAttack != null)
             {
