@@ -2,39 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum FSMStateType
-{
-    None, 
-    Patrol,
-    Chase,
-    Attack,
-    Escape,
-    Wander
-}
 
-public class FSMState : ScriptableObject
+public abstract class FSMState : ScriptableObject
 {
-    CharacterBehaviourFSM controller = null;
-    public CharacterBehaviourFSM Controller
-    {
-        get
+    public FSMAction[] actions;
+    public FSMTransition[] transitions;
+
+    public virtual void OnEnter(CharacterBehaviourFSM controller) { }
+    public virtual void OnExit(CharacterBehaviourFSM controller) { }
+    public virtual void DoAction(CharacterBehaviourFSM controller) { 
+        foreach (FSMAction action in actions)
         {
-            return controller;
-        }
-        set
-        {
-            controller = value;
+            action.DoAction(controller);
         }
     }
 
-    public virtual FSMStateType StateName { get;  }
-
-    public virtual void Init(CharacterBehaviourFSM fsm) {
-        Controller = fsm;
+    public virtual void CheckTransitions(CharacterBehaviourFSM controller) { 
+        foreach (FSMTransition transition in transitions)
+        {
+            bool decision = transition.decision.MakeDecision(controller);
+            if (decision)
+            {
+                controller.TransitionToState(transition.trueState);
+            }
+        }
     }
-    public virtual void OnEnter() { }
-    public virtual void OnExit() { }
-    public virtual void DoAction() { }
-
-    public virtual FSMStateType ShouldTransitionToState() { return StateName; }
 }

@@ -1,54 +1,53 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class CharacterBehaviourFSM : MonoBehaviour
 {
-    public FSMStateType startState = FSMStateType.Patrol;
-    public FSMState[] statePool;
-    public FSMState emptyAction;
+    public FSMState startState;
+    public FSMState emptyState;
 
-    FSMState[] statePoolInstances;
     FSMState currentState;
+
+    public Vector3 startPos;
+    public  Vector3 currentDest;
+    public NavMeshAgent agent;
+    public Perception perception;
+    public string targetTag = "Player";
+    public float runMultiplier = 3f;
+    public Transform target;
+    public CharacterStats stats;
+    public bool isAttacking = false;
+    public CharacterCombat combat;
+    public CharacterStats targetStats;
+    public float patrolAreaRadius;
+    public float maxWaitPeriod;
+    public float currentWait;
 
     // Start is called before the first frame update
     void Start()
     {
-        statePoolInstances = new FSMState[statePool.Length];
-        for (int i = 0; i < statePool.Length; ++i)
-        {
-            statePoolInstances[i] = FSMState.Instantiate(statePool[i]);
-            statePoolInstances[i].Init(this);
-        }
-        currentState = emptyAction;
+        startPos = transform.position;
+        agent = GetComponent<NavMeshAgent>();
+        perception = GetComponent<Perception>();
+        target = PlayerManager.instance.player;
+        targetStats = target.GetComponent<CharacterStats>();
+        combat = GetComponent<CharacterCombat>();
+
+        currentState = emptyState;
         TransitionToState(startState);
     }
 
     private void Update()
     {
-        currentState.DoAction();
-        FSMStateType nextState = currentState.ShouldTransitionToState();
+        currentState.DoAction(this);
 
-        if (nextState != currentState.StateName)
-        {
-            TransitionToState(nextState);
-        }
+        currentState.CheckTransitions(this);
     }
 
-    private void TransitionToState(FSMStateType stateName)
+    public void TransitionToState(FSMState state)
     {
-        currentState.OnExit();
-        currentState = GetState(stateName);
-        currentState.OnEnter();
-    }
-
-    FSMState GetState(FSMStateType stateName)
-    {
-        foreach (var state in statePoolInstances)
-        {
-            if (state.StateName == stateName)
-            {
-                return state;
-            }
-        }
-        return emptyAction;
+        currentState.OnExit(this);
+        currentState = state;
+        currentState.OnEnter(this);
     }
 }

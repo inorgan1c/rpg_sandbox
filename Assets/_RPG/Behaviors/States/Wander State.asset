@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5452321859550454780fba9bfe19ae93, type: 3}
   m_Name: Wander State
   m_EditorClassIdentifier: Assembly-CSharp::Wander
-  wanderAreaRadius: 10
-  maxWaitPeriod: 10
+  actions:
+  - {fileID: 11400000, guid: c517d2243ff500e498dd4a600bdedaab, type: 2}
+  transitions:
+  - decision: {fileID: 11400000, guid: 899611ca92625e544b560aa26e6d79e5, type: 2}
+    trueState: {fileID: 11400000, guid: c9463997dcbb0394cb0768f02b82e0b0, type: 2}
+    falseState: {fileID: 11400000}
