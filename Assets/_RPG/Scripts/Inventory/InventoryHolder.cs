@@ -30,8 +30,6 @@ public class InventoryHolder : MonoBehaviour
 
     private void OnLoot(Item item, int quantity)
     {
-        Debug.Log("Loot " + item);
-
         InventorySlot slot = _inventory.FindFirst(slot => slot.Item == item || slot.Item == null);
         if (slot == null && CanCreateSlots)
         {

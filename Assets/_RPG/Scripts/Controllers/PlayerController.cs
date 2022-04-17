@@ -5,12 +5,13 @@ public class PlayerController : MonoBehaviour
 {
     public LayerMask movementMask;
     public Interactable currentFocus;
-    public DialogueEventChannel DialogueChannel;
 
+    public DialogueEventChannel DialogueChannel;
 
     Camera cam;
     PlayerMotor motor;
     bool canMove = false;
+    SpellSystem spellSystem;
 
     private void OnEnable()
     {
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         cam = Camera.main;
         motor = GetComponent<PlayerMotor>();
+        spellSystem = GetComponent<SpellSystem>();
     }
 
     void Update()
@@ -62,7 +64,19 @@ public class PlayerController : MonoBehaviour
             //cast a magic spell if equipped?
             if (Input.GetMouseButton(1))
             {
-                
+                Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit))
+                { 
+                    //set focus on hit if interactable
+                    Enemy enemy = hit.collider.GetComponent<Enemy>();
+                    if (enemy)
+                    {
+                        spellSystem.Cast(enemy);
+                    }
+                }
+                    
             }
         }
     }

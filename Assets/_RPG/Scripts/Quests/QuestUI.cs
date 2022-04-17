@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class QuestUI : MonoBehaviour
 {
-    public Transform slotsParent;
-    public Text calendar;
-    public Text clock;
+    [SerializeField] Transform slotsParent;
+    [SerializeField] Text calendar;
+    [SerializeField] Text clock;
+    [SerializeField] GameObject alertPin;
 
     [SerializeField] GameObject slotPrefab;
     [SerializeField] GameObject journalPanel;
@@ -47,11 +48,14 @@ public class QuestUI : MonoBehaviour
     void ToggleJournal()
     {
         journalPanel.SetActive(!journalPanel.activeSelf);
+
+        alertPin.SetActive(false);
     }
 
 
     void UpdateJournal(Quest quest)
     {
+        alertPin.SetActive(true);
 
         if (!quest.completed)
         {
