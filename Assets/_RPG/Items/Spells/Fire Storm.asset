@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd39236a8e9a87647af8584f1a636efc, type: 3}
-  m_Name: Ice Storm
+  m_Name: Fire Storm
   m_EditorClassIdentifier: 
-  name: Ice Storm
-  spellClass: 0
-  damage: 25
+  Name: Fire Storm
+  Icon: {fileID: 21300000, guid: e69ee17127b40e346bf9cb1b89c43ea3, type: 3}
+  isDefaultItem: 0
+  spellClass: 1
+  damage: 30
   mana: 5
-  range: 10
+  range: 5
   spawnOffset: {x: 0, y: 3, z: 0}
-  gfx: {fileID: 7603484302147460652, guid: 45f2e28b507506c42a766bff6d8d2e68, type: 3}
+  gfx: {fileID: 5665307384027597157, guid: b548b0b1fac733d42a7f0ac474451628, type: 3}

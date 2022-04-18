@@ -9,13 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd39236a8e9a87647af8584f1a636efc, type: 3}
-  m_Name: Bolt Storm
+  m_Script: {fileID: 11500000, guid: edd36f324fdb537419ae1a85cd57a5a2, type: 3}
+  m_Name: SpellUI Event Channel
   m_EditorClassIdentifier: 
-  name: Bolt Storm
-  spellClass: 2
-  damage: 15
-  mana: 3
-  range: 10
-  spawnOffset: {x: 0, y: 3, z: 0}
-  gfx: {fileID: 2452533514447367262, guid: b84c3724ebd9e814391305a183cff34c, type: 3}
