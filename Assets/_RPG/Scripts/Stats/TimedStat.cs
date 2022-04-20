@@ -5,16 +5,19 @@ using UnityEngine;
 [System.Serializable]
 public class TimedStat : Stat
 {
-    public AnimationCurve timeDecrease;
+    public AnimationCurve timeModifier;
 
-    [SerializeField] TimeEventChannel TimeChannel;
-    private float currentValue;
+    [SerializeField] protected TimeEventChannel TimeChannel;
+    protected float currentValue;
 
-    public void Init()
+    public virtual void Init()
     {
         TimeChannel.OnNewHour += OnNewHour;
-        TimeChannel.OnNewDay += OnNewDay;
-        OnNewDay();
+    }
+    
+    protected virtual void OnDestroy()
+    {
+        TimeChannel.OnNewHour -= OnNewHour;
     }
 
     public void Restore(int p)
@@ -22,22 +25,13 @@ public class TimedStat : Stat
         currentValue += p;
         if (p > baseValue)
         {
-            p = baseValue;
+            currentValue = baseValue;
         }
     }
 
-    void OnNewHour()
+    protected virtual void OnNewHour()
     {
-        currentValue -= timeDecrease.Evaluate(PlayerStats.awakenTime);
-        if (currentValue <= 0)
-        {
-            currentValue = 0;
-        }
-    }
-
-    void OnNewDay()
-    {
-        currentValue = baseValue;
+        
     }
 
     public override int GetValue()

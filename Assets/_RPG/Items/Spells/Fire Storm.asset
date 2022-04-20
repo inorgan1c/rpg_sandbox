@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fire Storm
   m_EditorClassIdentifier: 
   Name: Fire Storm
-  Icon: {fileID: 21300000, guid: e69ee17127b40e346bf9cb1b89c43ea3, type: 3}
+  Icon: {fileID: 21300000, guid: 876be7dbd60ce6b4091d0f119e00f157, type: 3}
   isDefaultItem: 0
   spellClass: 1
   damage: 30

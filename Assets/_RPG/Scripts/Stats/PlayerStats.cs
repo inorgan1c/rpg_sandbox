@@ -7,16 +7,20 @@ public class PlayerStats : CharacterStats
 {
     int xp = 0;
     public static float awakenTime;
-    public TimedStat energy;
+    public Stat intelligence;
+    public EnergyStat energy;
+    public ManaStat mana;
 
     [SerializeField] TimeEventChannel timeEventChannel;
     [SerializeField] EquipmentEventChannel equipmentEventChannel;
+    [SerializeField] SpellEventChannel spellEventChannel;
 
     private void OnEnable()
     {
         equipmentEventChannel.OnEquipmentChanged += OnEquipmentChanged;
         timeEventChannel.OnNewHour += OnNewHour;
         timeEventChannel.OnNewDay += OnNewDay; //temporary!!! fixed when sleep time will be implemented
+        spellEventChannel.OnCastSpell += UpdateMana;
     }
 
     private void OnDisable()
@@ -37,6 +41,7 @@ public class PlayerStats : CharacterStats
     void Start()
     {
         energy.Init();
+        mana.Init();
         OnNewDay();
     }
 
@@ -84,4 +89,14 @@ public class PlayerStats : CharacterStats
     {
         awakenTime = 0;
     }
+
+    public void UpdateMana(Spell spell)
+    {
+        mana.Use(spell.mana);
+    }
+
+    public void RestoreMana(int mp)
+    {
+        mana.Restore(mp);
+    } 
 }

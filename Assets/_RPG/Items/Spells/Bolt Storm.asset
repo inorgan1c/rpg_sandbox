@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bolt Storm
   m_EditorClassIdentifier: 
   Name: Bolt Storm
-  Icon: {fileID: 21300000, guid: 2036a782c6af50140991468623a43ec2, type: 3}
+  Icon: {fileID: 21300000, guid: 6fb7b033985924f488f1ecf781f73c0a, type: 3}
   isDefaultItem: 0
   spellClass: 2
   damage: 15

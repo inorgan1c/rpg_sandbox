@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ice Storm
   m_EditorClassIdentifier: 
   Name: New Item
-  Icon: {fileID: 21300000, guid: 3892e1e9c803e7040bae521b9d42a1c5, type: 3}
+  Icon: {fileID: 21300000, guid: f4c6a1b57c3518f4eb200fbbcea01cec, type: 3}
   isDefaultItem: 0
   spellClass: 0
   damage: 25

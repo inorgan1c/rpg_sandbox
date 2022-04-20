@@ -29,11 +29,15 @@ public class SpellSlotUI : MonoBehaviour
 
     public void Use()
     {
-        PlayerManager.instance.player.GetComponent<SpellSystem>().Equip(spell);
+        if (spell)
+        {
+            GetComponentInParent<SpellUI>().OnEquipSpell(spell);
+        }
     }
 
     public void Clear()
     {
-
+        GetComponentInParent<SpellUI>().OnClearSlot(this);
+        HideSlot();
     }
 }

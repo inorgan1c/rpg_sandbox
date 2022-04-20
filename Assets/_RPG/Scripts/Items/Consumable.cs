@@ -5,6 +5,7 @@ public class Consumable : Item
 {
     public int healthModifier = 20; 
     public int energyModifier = 20; 
+    public int manaModifier = 10; 
 
     public override void Use()
     {
@@ -15,5 +16,6 @@ public class Consumable : Item
         PlayerStats pstats = stats as PlayerStats;
         stats.Heal(healthModifier);
         pstats.RestoreEnergy(energyModifier);
+        pstats.RestoreMana(manaModifier);
     }
 }

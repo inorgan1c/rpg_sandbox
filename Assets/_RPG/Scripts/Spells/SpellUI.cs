@@ -6,30 +6,37 @@ public class SpellUI : MonoBehaviour
 {
     public List<SpellSlotUI> slots;
 
-    [SerializeField] SpellUIEventChannel spellUIEventChannel;
+    [SerializeField] SpellSlotUI slotUIPrefab;
+    [SerializeField] SpellEventChannel spellEventChannel;
 
     private void Awake()
     {
-        if (spellUIEventChannel)
+        if (spellEventChannel)
         {
-            spellUIEventChannel.OnSpellLearnt += ShowSpellSlot;
+            spellEventChannel.OnSpellLearnt += ShowSpellSlot;
+            spellEventChannel.OnInitSpells += Init;
         }
     }
 
     private void OnDestroy()
     {
-        if (spellUIEventChannel)
+        if (spellEventChannel)
         {
-            spellUIEventChannel.OnSpellLearnt -= ShowSpellSlot;
+            spellEventChannel.OnSpellLearnt -= ShowSpellSlot;
+            spellEventChannel.OnInitSpells -= Init;
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    void Init(int capacity)
     {
-        slots = new List<SpellSlotUI>(GetComponentsInChildren<SpellSlotUI>());
-        slots.ForEach(slot => slot.HideSlot());
-        ToggleUI();
+        slots = new List<SpellSlotUI>(capacity);
+        for (int i=0; i<capacity; ++i)
+        {
+            SpellSlotUI slotUI = Instantiate<SpellSlotUI>(slotUIPrefab, transform);
+            slots.Add(slotUI);
+            slotUI.HideSlot();
+        }
+        
     }
 
 
@@ -44,8 +51,20 @@ public class SpellUI : MonoBehaviour
         }
     }
 
+    public void OnClearSlot(SpellSlotUI slot)
+    {
+        spellEventChannel.RaiseSpellUnlearnt(slot.spell);
+    }
+
+    public void OnEquipSpell(Spell spell)
+    {
+        spellEventChannel.RaiseEquipSpell(spell);
+    }
+
     public void ToggleUI()
     {
         gameObject.SetActive(!gameObject.activeSelf);
     }
 }
+
+    
