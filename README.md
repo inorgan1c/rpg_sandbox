@@ -7,7 +7,7 @@ A simple Unity sandbox project developed to test some common RPG game mechanics:
 - Inventory system
 - Dialogue system
 - Quest system (with scriptable objects based quest and quest goals)
-- Spell sytem
+- Spell system
 - Time management and day/night cycle
 - Event Channel System
 
