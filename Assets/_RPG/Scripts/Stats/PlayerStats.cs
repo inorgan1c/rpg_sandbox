@@ -12,6 +12,7 @@ public class PlayerStats : CharacterStats
     public ManaStat mana;
 
     [SerializeField] TimeEventChannel timeEventChannel;
+    [SerializeField] QuestEventChannel questEventChannel;
     [SerializeField] EquipmentEventChannel equipmentEventChannel;
     [SerializeField] SpellEventChannel spellEventChannel;
 
@@ -21,6 +22,7 @@ public class PlayerStats : CharacterStats
         timeEventChannel.OnNewHour += OnNewHour;
         timeEventChannel.OnNewDay += OnNewDay; //temporary!!! fixed when sleep time will be implemented
         spellEventChannel.OnCastSpell += UpdateMana;
+        questEventChannel.OnQuestCompleted += UpdateXP;
     }
 
     private void OnDisable()
@@ -40,9 +42,17 @@ public class PlayerStats : CharacterStats
 
     void Start()
     {
-        energy.Init();
-        mana.Init();
+        energy.Init(timeEventChannel);
+        mana.Init(timeEventChannel);
         OnNewDay();
+
+        statsEventChannel.OnArmorChanged(gameObject.GetInstanceID(), armor.GetValue());
+        statsEventChannel.OnDamageChanged(gameObject.GetInstanceID(), damage.GetValue());
+        statsEventChannel.OnIntelligenceChanged(gameObject.GetInstanceID(), intelligence.GetValue());
+        statsEventChannel.OnEnergyChanged(gameObject.GetInstanceID(), energy.GetBaseValue(), energy.GetValue());
+        statsEventChannel.OnManaChanged(gameObject.GetInstanceID(), mana.GetBaseValue(), mana.GetValue());
+        statsEventChannel.OnHealthChanged(gameObject.GetInstanceID(), maxHealth, currentHealth);
+        statsEventChannel.OnXPChanged(gameObject.GetInstanceID(), xp);
     }
 
     void OnEquipmentChanged(Equipment newItem, Equipment oldItem)
@@ -58,18 +68,28 @@ public class PlayerStats : CharacterStats
             armor.RemoveModifier(oldItem.armorModifier);
             damage.RemoveModifier(oldItem.damageModifier);
         }
+
+        statsEventChannel.OnArmorChanged(gameObject.GetInstanceID(), armor.GetValue());
+        statsEventChannel.OnDamageChanged(gameObject.GetInstanceID(), damage.GetValue());
+    }
+
+    public void UpdateXP(Quest quest)
+    {
+        UpdateXP(quest.reward.xp);
     }
 
     public void UpdateXP(int newXP)
     {
         xp += newXP;
+        statsEventChannel.OnXPChanged(gameObject.GetInstanceID(), xp);
+
         Debug.Log("Player XP: " + xp + "(+" + newXP + ")");
     } 
 
     public void RestoreEnergy(int ep)
     {
         energy.Restore(ep);
-
+        statsEventChannel.OnEnergyChanged(gameObject.GetInstanceID(), energy.GetBaseValue(), energy.GetValue());
     }
 
 
@@ -82,7 +102,6 @@ public class PlayerStats : CharacterStats
     public void OnNewHour()
     {
         awakenTime += 1/24f;
-
     }
 
     public void OnNewDay()
@@ -93,10 +112,36 @@ public class PlayerStats : CharacterStats
     public void UpdateMana(Spell spell)
     {
         mana.Use(spell.mana);
+        statsEventChannel.OnManaChanged(gameObject.GetInstanceID(), mana.GetBaseValue(), mana.GetValue());
     }
 
     public void RestoreMana(int mp)
     {
         mana.Restore(mp);
-    } 
+        statsEventChannel.OnManaChanged(gameObject.GetInstanceID(), mana.GetBaseValue(), mana.GetValue());
+    }
+
+    public void Sleep()
+    {
+        Time.timeScale = 4f;
+    }
+
+    public void WakeUp()
+    {
+        Time.timeScale = 1f;
+
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.S)) {
+            Sleep();
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            WakeUp();
+        }
+    }
 }
+

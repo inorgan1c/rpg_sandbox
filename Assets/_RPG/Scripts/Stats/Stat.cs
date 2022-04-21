@@ -9,6 +9,11 @@ public class Stat
 
     private List<int> modifiers = new List<int>();
 
+    public int GetBaseValue()
+    {
+        return baseValue;
+    }
+
     public virtual int GetValue()
     {
         int value = baseValue;

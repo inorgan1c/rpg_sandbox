@@ -6,7 +6,8 @@ public class PlayerController : MonoBehaviour
     public LayerMask movementMask;
     public Interactable currentFocus;
 
-    public DialogueEventChannel DialogueChannel;
+    [SerializeField] DialogueEventChannel dialogueChannel;
+    [SerializeField] StatsEventChannel statsEventChannel;
 
     Camera cam;
     PlayerMotor motor;
@@ -15,14 +16,18 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        DialogueChannel.OnStartDialogue += EnableMovement;
-        DialogueChannel.OnEndDialogue += DisableMovement;
+        dialogueChannel.OnStartDialogue += EnableMovement;
+        dialogueChannel.OnEndDialogue += DisableMovement;
+        statsEventChannel.OnSleep += DisableMovement;
+        statsEventChannel.OnWakeUp += EnableMovement;
     }
 
     private void OnDisable()
     {
-        DialogueChannel.OnStartDialogue -= EnableMovement;
-        DialogueChannel.OnEndDialogue -= DisableMovement;
+        dialogueChannel.OnStartDialogue -= EnableMovement;
+        dialogueChannel.OnEndDialogue -= DisableMovement;
+        statsEventChannel.OnSleep -= DisableMovement;
+        statsEventChannel.OnWakeUp -= EnableMovement;
     }
 
     void Start()
@@ -106,7 +111,12 @@ public class PlayerController : MonoBehaviour
         currentFocus = null;
     }
 
-    void EnableMovement(Dialogue dialogue=null)
+    void EnableMovement(Object obj)
+    {
+        canMove = true;
+    }
+
+    void EnableMovement()
     {
         canMove = true;
     }

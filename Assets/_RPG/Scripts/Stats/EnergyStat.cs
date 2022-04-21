@@ -5,12 +5,11 @@ using UnityEngine;
 [System.Serializable]
 public class EnergyStat : TimedStat
 {
-    public override void Init()
+    public override void Init(TimeEventChannel timeEventChannel)
     {
-        base.Init();
+        base.Init(timeEventChannel);
 
-        TimeChannel.OnNewDay += OnNewDay;
-        OnNewDay();
+        currentValue = baseValue;
 
     }
 
@@ -18,14 +17,8 @@ public class EnergyStat : TimedStat
     {
         base.OnDestroy();
 
-        TimeChannel.OnNewDay -= OnNewDay;
     }
 
-
-    void OnNewDay()
-    {
-        currentValue = baseValue;
-    }
 
     protected override void OnNewHour()
     {

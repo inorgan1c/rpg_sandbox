@@ -5,9 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class ManaStat : TimedStat
 {
-    public override void Init()
+    public override void Init(TimeEventChannel timeEventChannel)
     {
-        base.Init();
+        base.Init(timeEventChannel);
 
         currentValue = baseValue;
     }

@@ -7,11 +7,12 @@ public class TimedStat : Stat
 {
     public AnimationCurve timeModifier;
 
-    [SerializeField] protected TimeEventChannel TimeChannel;
+    protected TimeEventChannel TimeChannel;
     protected float currentValue;
 
-    public virtual void Init()
+    public virtual void Init(TimeEventChannel timeEventChannel)
     {
+        TimeChannel = timeEventChannel;
         TimeChannel.OnNewHour += OnNewHour;
     }
     

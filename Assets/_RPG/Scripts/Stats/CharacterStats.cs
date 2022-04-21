@@ -33,17 +33,6 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
-    //public void UseMana(int mana)
-    //{
-    //    currentMana -= mana;
-    //    currentMana = currentMana >= 0 ? currentMana : 0;
-    //}
-
-    //public void RestoreMana(int mana)
-    //{
-    //    currentMana += mana;
-    //    currentMana = Mathf.Clamp(currentMana, 0, maxMana);
-    //}
 
     public void Heal(int hp)
     {

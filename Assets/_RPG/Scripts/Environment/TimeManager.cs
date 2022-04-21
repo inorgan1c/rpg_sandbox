@@ -23,7 +23,7 @@ public class TimeManager : Singleton<TimeManager>
     // Update is called once per frame
     void Update()
     {
-        time += timeRate * Time.deltaTime;
+        time += timeRate * Time.deltaTime * Time.timeScale;
 
         float hours = DayTimeInHours();
         if (hours == 0)

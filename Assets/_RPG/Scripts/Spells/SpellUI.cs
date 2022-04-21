@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,9 +35,9 @@ public class SpellUI : MonoBehaviour
             slots.Add(slotUI);
             slotUI.HideSlot();
         }
-        
-    }
 
+        ToggleUI();
+    }
 
 
     void ShowSpellSlot(Spell spell)
