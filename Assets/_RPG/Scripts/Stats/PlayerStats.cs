@@ -20,7 +20,7 @@ public class PlayerStats : CharacterStats
     {
         equipmentEventChannel.OnEquipmentChanged += OnEquipmentChanged;
         timeEventChannel.OnNewHour += OnNewHour;
-        timeEventChannel.OnNewDay += OnNewDay; //temporary!!! fixed when sleep time will be implemented
+        timeEventChannel.OnNewDay += OnNewDay;
         spellEventChannel.OnCastSpell += UpdateMana;
         questEventChannel.OnQuestCompleted += UpdateXP;
     }
@@ -35,15 +35,15 @@ public class PlayerStats : CharacterStats
         if (timeEventChannel)
         {
             timeEventChannel.OnNewHour += OnNewHour;
-            timeEventChannel.OnNewDay += OnNewDay; //temporary!!! fixed when sleep time will be implemented
+            timeEventChannel.OnNewDay += OnNewDay; 
         }
 
     }
 
     void Start()
     {
-        energy.Init(timeEventChannel);
-        mana.Init(timeEventChannel);
+        energy.Init(gameObject.GetInstanceID(), timeEventChannel, statsEventChannel);
+        mana.Init(gameObject.GetInstanceID(), timeEventChannel, statsEventChannel);
         OnNewDay();
 
         statsEventChannel.OnArmorChanged(gameObject.GetInstanceID(), armor.GetValue());
@@ -123,11 +123,13 @@ public class PlayerStats : CharacterStats
 
     public void Sleep()
     {
+        statsEventChannel.RaiseSleep();
         Time.timeScale = 4f;
     }
 
     public void WakeUp()
     {
+        statsEventChannel.RaiseWakeUp();
         Time.timeScale = 1f;
 
     }

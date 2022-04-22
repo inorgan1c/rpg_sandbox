@@ -8,31 +8,51 @@ public class TimedStat : Stat
     public AnimationCurve timeModifier;
 
     protected TimeEventChannel TimeChannel;
+    protected StatsEventChannel StatsChannel;
     protected float currentValue;
-
-    public virtual void Init(TimeEventChannel timeEventChannel)
+    protected bool isSleeping;
+    protected int charID;
+    public virtual void Init(int id, TimeEventChannel timeEventChannel, StatsEventChannel statsEventChannel)
     {
+        currentValue = baseValue;
+
         TimeChannel = timeEventChannel;
         TimeChannel.OnNewHour += OnNewHour;
+
+        StatsChannel = statsEventChannel;
+        StatsChannel.OnSleep += OnSleep;
+        StatsChannel.OnWakeUp += OnWakeUp;
+        isSleeping = false;
+
+        charID = id;
     }
     
     protected virtual void OnDestroy()
     {
+        StatsChannel.OnSleep -= OnSleep;
+        StatsChannel.OnWakeUp -= OnWakeUp;
         TimeChannel.OnNewHour -= OnNewHour;
     }
 
-    public void Restore(int p)
+    public virtual void Restore(int p)
     {
         currentValue += p;
-        if (p > baseValue)
-        {
-            currentValue = baseValue;
-        }
+        currentValue = Mathf.Clamp(currentValue, 0, baseValue);
     }
 
     protected virtual void OnNewHour()
     {
         
+    }
+
+    protected virtual void OnSleep()
+    {
+        isSleeping = true;
+    }
+
+    protected virtual void OnWakeUp()
+    {
+        isSleeping = false;
     }
 
     public override int GetValue()

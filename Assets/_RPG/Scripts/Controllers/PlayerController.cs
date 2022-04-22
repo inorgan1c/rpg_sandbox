@@ -11,21 +11,21 @@ public class PlayerController : MonoBehaviour
 
     Camera cam;
     PlayerMotor motor;
-    bool canMove = false;
+    bool canMove = true;
     SpellSystem spellSystem;
 
     private void OnEnable()
     {
-        dialogueChannel.OnStartDialogue += EnableMovement;
-        dialogueChannel.OnEndDialogue += DisableMovement;
+        dialogueChannel.OnStartDialogue += OnDialogue;
+        dialogueChannel.OnEndDialogue += EnableMovement;
         statsEventChannel.OnSleep += DisableMovement;
         statsEventChannel.OnWakeUp += EnableMovement;
     }
 
     private void OnDisable()
     {
-        dialogueChannel.OnStartDialogue -= EnableMovement;
-        dialogueChannel.OnEndDialogue -= DisableMovement;
+        dialogueChannel.OnStartDialogue -= OnDialogue;
+        dialogueChannel.OnEndDialogue -= EnableMovement;
         statsEventChannel.OnSleep -= DisableMovement;
         statsEventChannel.OnWakeUp -= EnableMovement;
     }
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!EventSystem.current.IsPointerOverGameObject() && !canMove)
+        if (!EventSystem.current.IsPointerOverGameObject() && canMove)
         {
             if (Input.GetMouseButton(0))
             {
@@ -111,9 +111,9 @@ public class PlayerController : MonoBehaviour
         currentFocus = null;
     }
 
-    void EnableMovement(Object obj)
+    void OnDialogue(Dialogue dialogue)
     {
-        canMove = true;
+        DisableMovement();
     }
 
     void EnableMovement()

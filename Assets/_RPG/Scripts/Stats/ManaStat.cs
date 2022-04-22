@@ -5,22 +5,13 @@ using UnityEngine;
 [System.Serializable]
 public class ManaStat : TimedStat
 {
-    public override void Init(TimeEventChannel timeEventChannel)
-    {
-        base.Init(timeEventChannel);
-
-        currentValue = baseValue;
-    }
-
     protected override void OnNewHour()
     {
         base.OnNewHour();
 
         currentValue += timeModifier.Evaluate(PlayerStats.awakenTime);
-        if (currentValue >= baseValue)
-        {
-            currentValue = baseValue;
-        }
+        currentValue = Mathf.Clamp(currentValue, 0, baseValue);
+        StatsChannel.RaiseManaChanged(charID, GetBaseValue(), GetValue());
     }
 
     public void Use(float mp)

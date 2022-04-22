@@ -16643,7 +16643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f654327274f61489533d7fbb2b7c81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fullDayLength: 600
+  fullDayLength: 60
   startTime: 0.3
   timeEventChannel: {fileID: 11400000, guid: a5898a88f770daa488e260e533a02e18, type: 2}
 --- !u!1001 &1703424437

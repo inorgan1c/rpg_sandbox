@@ -5,18 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class EnergyStat : TimedStat
 {
-    public override void Init(TimeEventChannel timeEventChannel)
-    {
-        base.Init(timeEventChannel);
-
-        currentValue = baseValue;
-
-    }
-
     protected override void OnDestroy()
     {
         base.OnDestroy();
-
     }
 
 
@@ -24,10 +15,14 @@ public class EnergyStat : TimedStat
     {
         base.OnNewHour();
 
-        currentValue += timeModifier.Evaluate(PlayerStats.awakenTime);
-        if (currentValue <= 0)
+        float modifier = timeModifier.Evaluate(PlayerStats.awakenTime);
+        if (isSleeping)
         {
-            currentValue = 0;
+            modifier *= -1f;
         }
+
+        currentValue += modifier;
+        currentValue = Mathf.Clamp(currentValue, 0, baseValue);
+        StatsChannel.RaiseEnergyChanged(charID, GetBaseValue(), GetValue());
     }
 }
