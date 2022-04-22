@@ -40,9 +40,11 @@ public class Quest : ScriptableObject
 
         public void Evaluate()
         {
-            if (CurrentAmount >= requiredAmount)
-            {
-                Complete();
+            if (!Completed) {
+                if (CurrentAmount >= requiredAmount)
+                {
+                    Complete();
+                }
             }
         }
 
@@ -74,12 +76,16 @@ public class Quest : ScriptableObject
 
     public void CheckGoals()
     {
-        completed = goals.TrueForAll(goal => goal.Completed);
-        if (completed)
+        if (!completed)
         {
-            //reward ... 
-            questEventChannel?.RaiseQuestCompleted(this);
+            completed = goals.TrueForAll(goal => goal.Completed);
+            if (completed)
+            {
+                //reward ... 
+                questEventChannel?.RaiseQuestCompleted(this);
+            }
         }
+        
     }
 
 }

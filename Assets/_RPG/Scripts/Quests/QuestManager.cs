@@ -34,7 +34,6 @@ public class QuestManager : MonoBehaviour
         {
             questCompleteDialogue.Init(q.info.title, q.reward.xp);
             dialogueEventChannel.OnStartDialogue(questCompleteDialogue);
-            questEventChannel?.RaiseQuestCompleted(q);
         }
     }
 }
